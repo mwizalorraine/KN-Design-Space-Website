@@ -1,0 +1,58 @@
+@import "tailwindcss";
+
+@theme { 
+  --font-display: var(--font-display); 
+  --font-serif: var(--font-serif); 
+  --font-mono: var(--font-mono); 
+} 
+
+:root{
+  --paper:#F1EFEA; 
+  --paper-light:#F7F5F1;
+  --white:#FFFFFF;
+  --ink:#0A0A0A;
+  --concrete:#83807A;
+  --brass:#A8461F;
+  --charcoal:#3E2A1C;
+  --wood:#8A5A2E;
+  --on-dark:#F1EFEA;
+  --line: rgba(10,10,10,0.16);
+}
+
+[data-theme="dark"]{
+  --paper:#16130F;
+  --paper-light:#1E1A14;
+  --white:#241F17; 
+  --ink:#F1EFEA; 
+  --concrete:#A79E90;
+  --brass:#D9873F;
+  --line: rgba(205, 158, 38, 0.14);
+}
+
+body{
+  background: var(--paper);
+  color: var(--ink);
+  cursor: none;
+}
+@media (max-width: 900px){
+  body{ cursor:auto; }
+}
+
+#cursor{
+  position:fixed; width:10px; height:10px; border-radius:50%;
+  background:var(--ink); pointer-events:none; z-index:9999;
+  transform:translate(-50%,-50%);
+  transition:width .25s, height .25s, background .25s;
+  mix-blend-mode:difference;
+}
+#cursor.magnet{ width:56px; height:56px; background:var(--brass); }
+@media (max-width:900px){ #cursor{display:none;} }
+
+.ticker-track{
+  display:flex; width:max-content;
+  animation: scroll 26s linear infinite;
+}
+[data-theme="dark"] .site-logo{
+  filter: invert(1);
+}
+@keyframes scroll{ from{transform:translateX(0);} to{transform:translateX(-50%);} }
