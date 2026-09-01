@@ -66,7 +66,7 @@ const revealedCount = Math.floor((progress / 100) * WELCOME_TEXT.length);
               poster="/videos/welcome-poster.jpg"
               className="absolute inset-0 w-full h-full object-cover"
             >
-              <source src="/videos/fast welcome video .mp4" type="video/mp4" />
+              <source src="/videos/welcome-video.mp4" type="video/mp4" />
             </video>
           )}
 
