@@ -30,7 +30,7 @@ export default function CategoryPage() {
   const [projects, setProjects] = useState<Project[]>([]);
 
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/projects/`)
+    fetch('http://127.0.0.1:8000/api/projects/')
       .then((res) => res.json())
       .then((data: Project[]) => setProjects(data.filter((p) => p.category === category)))
       .catch(() => setProjects([]));
@@ -59,7 +59,7 @@ export default function CategoryPage() {
         <div className="grid md:grid-cols-3 gap-[2px] bg-[var(--line)]">
           {projects.length === 0 && (
             <div className="bg-[var(--paper)] p-8 font-mono text-sm opacity-60 md:col-span-3">
-              No projects in this category yet.
+              Something went wrong. Try again
             </div>
           )}
           {projects.map((p) => (

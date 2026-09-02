@@ -118,7 +118,7 @@ export default function ProjectDetail() {
   const [notFound, setNotFound] = useState(false);
 
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/projects/${slug}/`)
+    fetch(`http://127.0.0.1:8000/api/projects/${slug}/`)
       .then((res) => {
         if (!res.ok) throw new Error('not found');
         return res.json();

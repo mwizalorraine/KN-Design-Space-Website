@@ -73,14 +73,14 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/projects/`)
+    fetch('http://127.0.0.1:8000/api/projects/')
       .then((res) => res.json())
       .then(setProjects)
       .catch(() => setProjects([]));
   }, []);
 
   useEffect(() => {
-  fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/category-images/`)
+  fetch('http://127.0.0.1:8000/api/category-images/')
     .then((res) => res.json())
     .then((data: { category: string; image: string }[]) => {
       const map: Record<string, string> = {};
@@ -104,13 +104,13 @@ export default function Home() {
   />
   <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-black/10" />
   
-  <div className="relative h-full flex flex-col justify-end px-12 pb-16 text-[var(--paper-light)] mb-10">
+  <div className="relative h-full flex flex-col justify-end px-6 md:px-12 pb-10 md:pb-16 text-[var(--on-dark)]">
     <div className="font-serif italic text-lg opacity-85 mb-4">Transforming lives through architecture.</div>
     <motion.h1
       initial={{ opacity: 0, y: 24}}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 3 }}
-      className="font-display font-bold uppercase text-[clamp(40px,7vw,96px)] leading-[0.94] tracking-tight max-w-[16ch] text-balance">
+      transition={{ duration: 3 }} 
+      className="font-display font-bold uppercase text-[clamp(32px,8vw,96px)] leading-[0.94] tracking-tight max-w-[16ch] text-balance">
       Spaces built around{' '}
       <span className="relative inline-block h-[1em] overflow-hidden align-bottom">
         {rotatorWords.map((w, i) => (
@@ -139,10 +139,10 @@ export default function Home() {
       initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
-      className="flex gap-3.5 mt-8"
+      className="flex flex-wrap gap-3 mt-8"
     >
-      <a href="#projects" className="magnetic font-mono text-xs uppercase px-5 py-2.5 rounded-full bg-[var(--paper-light)] text-[var(--ink)]">View Projects →</a>
-      <a href="/contact" className="magnetic font-mono text-xs uppercase px-5 py-2.5 rounded-full border border-[var(--paper-light)]">Start a project</a>
+      <a href="#projects" className="magnetic font-mono text-xs uppercase px-5 py-2.5 rounded-full bg-[var(--on-dark)] text-[var(--charcoal)]">View Projects →</a>
+      <a href="/contact" className="magnetic font-mono text-xs uppercase px-5 py-2.5 rounded-full border border-[var(--on-dark)]">Start a project</a>
     </motion.div>
   </div>
 </section>
@@ -165,17 +165,15 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="grid md:grid-cols-3 gap-6 px-12 py-16">
+      <div className="grid md:grid-cols-3 gap-6 px-6 md:px-12 py-10 md:py-16">
         <StatCounter target={10} label="Years in Operation" />
         <StatCounter target={26} label="Projects" />
         <StatCounter target={928} label="Housing Units Delivered" />
       </div>
 
-      
-
-      <section id="projects" className="px-12 py-20 mb-3">
-        <h2 className="font-display font-semibold text-3xl mb-3">Projects Categories</h2>
-        <p className="opacity-70 mb-9 max-w-[52ch]"></p>
+ <section id="projects" className="px-6 md:px-12 py-12 md:py-20 mt-0">
+        <h2 className="font-display font-semibold text-3xl mb-3 mt-0">Projects Categories</h2>
+        <p className="opacity-70 mb-9 max-w-[52ch]"></p> 
         <div className="grid md:grid-cols-2 gap-2 justify-center mt-4  bg-[var(--line)]">
           {Object.entries(categoryLabels).map(([key, label]) => {
             const catProjects = projects.filter((p) => p.category === key);
@@ -185,8 +183,7 @@ export default function Home() {
               <Link
                 href={`/projects/category/${key}`}
                 key={key}
-                className="magnetic cursor-none bg-[var(--paper)] p-6 min-h-[400px] flex flex-col justify-end relative overflow-hidden group"
-              >
+                className="magnetic cursor-none bg-[var(--paper)] p-6 min-h-[260px] md:min-h-[400px] flex flex-col justify-end relative overflow-hidden group">
                 {cover ? (
                   <img
                     src={cover}
@@ -197,85 +194,86 @@ export default function Home() {
                   <div className="absolute top-6 left-6 w-8 h-8 rounded-sm bg-[var(--brass)] transition-transform duration-300 group-hover:scale-[4] group-hover:opacity-10" />
                 )}
                 {cover && <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />}
-                   <h3 className={`font-display font-semibold text-3xl relative ${cover ? 'text-white' : ''}`}>{label}</h3>
+                   <h3 className={`font-display font-semibold text-xl md:text-3xl relative ${cover ? 'text-white' : ''}`}>{label}</h3>
               </Link>
             );
           })}
         </div>
       </section>
 
-      <section id="services" className="px-12 py-20 bg-[var(--paper-light)] ">
-  <h2 className="font-display font-semibold text-5xl mb-15 text-center">Our Services</h2>
+      <section id="services" className="px-6 md:px-12 py-12 md:py-20 bg-[var(--paper-light)]">
+  <h2 className="font-display font-semibold text-3xl md:text-5xl mb-10 md:mb-15 text-center">Our Services</h2>
+  <div className="absolute inset-0 bg-black/10" />
   <div className="grid md:grid-cols-3 gap-14 md:gap-10">
     {[
       {
         title: 'Project Design',
-        icon: <img src="/images/files/Project_Design.png" alt="" className="w-22 h-22 " />,
+        icon: <img src="/images/files/Project_Design.png" alt="" className="w-10 h-10 md:w-14 md:h-14 service-icon"/>,
         items: [
           {
             label: 'Architectural Design',
-              icon: <img src="/images/files/Arch_design_icon.png" alt="" className="w-10 h-10" />,
+              icon: <img src="/images/files/Arch_design_icon.png" alt="" className="w-10 h-10 service-icon" />,
              
           }, 
           {
             label: 'Interior Design',
-            icon: <img src="/images/files/Interior_Design.png" alt="" className="w-10 h-10" />,
+            icon: <img src="/images/files/Interior_Design.png" alt="" className="w-10 h-10 service-icon" />,
            
           },
           {
             label: 'Cost and Feasibility Planning',
-            icon: <img src="/images/files/Cost_and_feasibility.png" alt="" className="w-10 h-10" />,
+            icon: <img src="/images/files/Cost_and_feasibility.png" alt="" className="w-10 h-10 service-icon" />,
           },
         ],
       },
       {
         title: 'Project Engineering',
-        icon: <img src="/images/files/Proj_Engineering.png" alt="" className="w-20 h-20" />,
+        icon: <img src="/images/files/Proj_Engineering.png" alt="" className="w-10 h-10 md:w-14 md:h-14 service-icon" />,
         items: [
           {
             label: 'Structural Design',
-            icon: <img src="/images/files/Structural_Design.png" alt="" className="w-10 h-10" />,
+            icon: <img src="/images/files/Structural_Design.png" alt="" className="w-10 h-10 service-icon" />,
           },
           {
             label: 'Electrical Design',
-            icon: <img src="/images/files/Electrical_Design.png" alt="" className="w-10 h-10" />,
+            icon: <img src="/images/files/Electrical_Design.png" alt="" className="w-10 h-10 service-icon" />,
           },
           {
             label: 'Mechanical and Plumbing Design',
-            icon: <img src="/images/files/Mechanical_Plumbing.png" alt="" className="w-10 h-10" />,
+            icon: <img src="/images/files/Mechanical_Plumbing.png" alt="" className="w-10 h-10 service-icon" />,
           },
         ],
       },
       {
         title: 'Project Compliance',
-        icon: <img src="/images/files/Proj_Compliance.png" alt="" className="w-20 h-20" />,
+        icon: <img src="/images/files/Proj_Compliance.png" alt="" className="w-10 h-10 md:w-14 md:h-14 service-icon" />,
         items: [
           {
             label: 'Land Use Advisory',
-            icon: <img src="/images/files/Land_Use_Advisory.png" alt="" className="w-10 h-10" />,
+            icon: <img src="/images/files/Land_Use_Advisory.png" alt="" className="w-10 h-10 service-icon" />,
           },
           {
             label: 'Permitting and Approvals',
-            icon: <img src="/images/files/Permitting_Approval.png" alt="" className="w-10 h-10" />,
+            icon: <img src="/images/files/Permitting_Approval.png" alt="" className="w-10 h-10 service-icon" />,
           },
           {
             label: 'Construction Supervision',
-            icon: <img src="/images/files/construction-supervision.png" alt="" className="w-10 h-10" />,
+            icon: <img src="/images/files/construction-supervision.png" alt="" className="w-10 h-10 service-icon" />,
           },
         ],
       },
     ].map((cat) => (
       <div key={cat.title} className="text-center md:text-left">
-        <div className="w-25 h-25 rounded-full border-2 border-[var(--brass)] icon-[var(--on-dark)] flex-shrink-0 flex items-center justify-center mx-auto md:mx-0 mb-3 text-[var(--brass)]">
+        <div className="w-16 h-16 md:w-24 md:h-24 rounded-full border-2 border-[var(--brass)] flex-shrink-0 flex items-center justify-center mx-auto md:mx-0 mb-3 text-[var(--brass)]">
           {cat.icon}
         </div> 
         <h3 className="font-display font-bold text-3xl uppercase leading-tight mb-3">{cat.title}</h3>
-        <div className="w-70 h-[2px] bg-[var(--brass)] mx-auto md:mx-0 mb-9" />
+        <div className="w-16 md:w-24 h-[2px] bg-[var(--brass)] mx-auto md:mx-0 mb-6 md:mb-9" />
         <ul className="space-y-6"> 
           {cat.items.map((item) => (
             <li key={item.label} className="flex items-center gap-4 justify-center md:justify-start">
               <span className="w-8 h-8 flex-shrink-0 text-[var(--ink)] opacity-100">{item.icon}</span>
-              <span className="text-[25px]">{item.label}</span>
+              <span className="text-base md:text-xl">{item.label}</span>
             </li> 
           ))}
         </ul>
@@ -322,14 +320,37 @@ export default function Home() {
             Start a project →
           </a>
         </div>
+        <div className="flex grid md:grid-cols-3 gap-7 md:gap-3 mb-8">
+        <div className="flex items-center gap-3">
+            <svg viewBox="0 0 24 24" className="w-4.5 h-4.5 stroke-[var(--brass)] fill-none" strokeWidth="1.8"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 3" /></svg>
+            <div>
+              <div className="font-mono text-[10px] uppercase opacity-50">Response Time</div>
+              <div className="font-mono text-xs uppercase">Within 2 Business Days</div>
+            </div>
+          </div>
+          <div className="flex items-center gap-3">
+            <svg viewBox="0 0 24 24" className="w-4.5 h-4.5 stroke-[var(--brass)] fill-none" strokeWidth="1.8"><rect x="3" y="4" width="18" height="17" rx="2" /><path d="M3 9h18M8 2v4M16 2v4" /></svg>
+            <div>
+              <div className="font-mono text-[10px] uppercase opacity-50">Office Hours</div>
+              <div className="font-mono text-xs uppercase">Mon–Fri, 9:00–17:00 CAT</div>
+            </div>
+          </div>
+          <div className="flex items-center gap-3">
+            <svg viewBox="0 0 24 24" className="w-4.5 h-4.5 stroke-[var(--brass)] fill-none" strokeWidth="1.8"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" /></svg>
+            <div>
+              <div className="font-mono text-[10px] uppercase opacity-50">Preferred</div>
+              <div className="font-mono text-xs uppercase">Email or WhatsApp</div>
+            </div>
+          </div>
+          </div>
 
         {/* MAP + DIRECT — one balanced row */}
-        <div className="grid md:grid-cols-2 gap-50 mb-4">
-          <div className="border border-[var(--ink)] p-3 h-fit w-190">
-            <div className="overflow-hidden" style={{ height: '260px', width: '100%' }}>
+        <div className="grid md:grid-cols-2 gap-10 md:gap-20 mb-8">
+          <div className="border border-[var(--ink)] p-3 h-fit w-full">
+            <div className="overflow-hidden h-[180px] md:h-[260px] w-full">
               <iframe
                 src="https://www.google.com/maps?q=KN%205%20Rd%2C%20Immeuble%20Aigle%20Blanc%2C%20Kimihurura%2C%20Kigali%2C%20Rwanda&output=embed"
-                width="100%" 
+                width="100%"  
                 height="100%" 
                 style={{ border: 10, filter: 'grayscale(20%)' }}
                 loading="lazy"
@@ -342,23 +363,23 @@ export default function Home() {
             
               <a href="https://www.google.com/maps/dir/?api=1&destination=KN%205%20Rd%2C%20Immeuble%20Aigle%20Blanc%2C%20Kimihurura%2C%20Kigali%2C%20Rwanda"
               target="_blank"
-              className="magnetic inline-flex items-center gap-2 font-mono text-xs uppercase px-15 py-2.5 rounded-full bg-[var(--brass)] text-[var(--paper-light)] mt-4"
-            >
+              className="magnetic inline-flex items-center gap-2 font-mono text-xs uppercase px-6 py-2.5 rounded-full bg-[var(--brass)] text-[var(--paper-light)] mt-4"
+              >
               Get directions → 
             </a>
           </div>
 
           <div className="flex flex-col justify-center">
-            <div className="font-mono text-6xs uppercase text-[var(--brass)] mb-3">Direct</div>
-            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=kndesignspace@gmail.com" target="_blank" className="magnetic block font-display font-semibold text-3xl hover:text-[var(--brass)] transition-colors mb-3">
+            <div className="font-mono text-[10px] uppercase text-[var(--brass)] mb-3">Direct</div>
+            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=kndesignspace@gmail.com" target="_blank" className="magnetic block font-display font-semibold text-lg md:text-2xl hover:text-[var(--brass)] transition-colors mb-3">
               kndesignspace@gmail.com
             </a>
-            <a href="tel:+250788841556" className="magnetic block text-3xl opacity-80 hover:text-[var(--brass)] transition-colors mb-8">
+            <a href="tel:+250788841556" className="magnetic block font-display font-semibold  text-lg md:text-2xl opacity-75 hover:text-[var(--brass)] transition-colors mb-3">
               +250 788 841 556
             </a>
 
-            <div className="font-mono text-6xs uppercase text-[var(--brass)] mb-3">Reach Us On</div>
-            <div className="flex gap-5"> 
+            <div className="font-mono text-[10px] uppercase text-[var(--brass)] mb-3">REACH US ON</div>
+            <div className="flex gap-5">
           
   <a href="https://wa.me/250788841556" target="_blank" aria-label="WhatsApp" className="magnetic group flex flex-col items-center gap-1.5">
     <span className="w-30 h-30 rounded-full border border-[var(--line)] flex items-center justify-center group-hover:bg-[var(--ink)] group-hover:text-[var(--paper-light)] transition-colors">
@@ -383,7 +404,7 @@ export default function Home() {
 
   </div>
   </div>
-</div>
+</div> 
       </footer>
 
       <a

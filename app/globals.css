@@ -29,6 +29,10 @@
   --line: rgba(205, 158, 38, 0.14);
 }
 
+[data-theme="dark"] .service-icon{
+  filter: invert(1);
+}
+
 body{
   background: var(--paper);
   color: var(--ink);
