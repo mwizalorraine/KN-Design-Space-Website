@@ -7,7 +7,7 @@ import ThemeToggle from './ThemeToggle';
 const links = [
   { label: 'Home', href: '/' },
   { label: 'Projects', href: '/#projects' },
-  { label: 'Studio', href: '/studio' },
+  { label: 'Team', href: '/studio' },
   { label: 'Services', href: '/#services' },
   { label: 'Contact Us', href: '/contact' },
 ];
@@ -66,7 +66,7 @@ export default function NavOverlay() {
   const isActive = (label: string) => {
     if (label === 'Home') return pathname === '/' && (activeSection === 'home' || activeSection === null);
     if (label === 'Projects') return pathname.startsWith('/projects') || (pathname === '/' && activeSection === 'projects');
-    if (label === 'Studio') return pathname === '/studio';
+    if (label === 'Team') return pathname === '/studio';
     if (label === 'Services') return pathname === '/' && activeSection === 'services';
     if (label === 'Contact Us') return pathname === '/contact';
     return false;

@@ -171,7 +171,7 @@ export default function Home() {
         <StatCounter target={928} label="Housing Units Delivered" />
       </div>
 
- <section id="projects" className="px-6 md:px-12 py-12 md:py-20 mt-0">
+ <section id="projects" className="px-6 md:px-12 py-12 md:py-10 mt-0">
         <h2 className="font-display font-semibold text-3xl mb-3 mt-0">Projects Categories</h2>
         <p className="opacity-70 mb-9 max-w-[52ch]"></p> 
         <div className="grid md:grid-cols-2 gap-2 justify-center mt-4  bg-[var(--line)]">
@@ -268,7 +268,7 @@ export default function Home() {
           {cat.icon}
         </div> 
         <h3 className="font-display font-bold text-3xl uppercase leading-tight mb-3">{cat.title}</h3>
-        <div className="w-16 md:w-24 h-[2px] bg-[var(--brass)] mx-auto md:mx-0 mb-6 md:mb-9" />
+        <div className="w-36 md:w-44 h-[2px] bg-[var(--brass)] mx-auto md:mx-0 mb-6 md:mb-9" />
         <ul className="space-y-6"> 
           {cat.items.map((item) => (
             <li key={item.label} className="flex items-center gap-4 justify-center md:justify-start">
@@ -320,7 +320,7 @@ export default function Home() {
             Start a project →
           </a>
         </div>
-        <div className="flex grid md:grid-cols-3 gap-7 md:gap-3 mb-8">
+        <div className="flex grid md:grid-cols-3 items-center gap-7 md:gap-3 mb-8">
         <div className="flex items-center gap-3">
             <svg viewBox="0 0 24 24" className="w-4.5 h-4.5 stroke-[var(--brass)] fill-none" strokeWidth="1.8"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 3" /></svg>
             <div>
@@ -374,7 +374,7 @@ export default function Home() {
             <a href="https://mail.google.com/mail/?view=cm&fs=1&to=kndesignspace@gmail.com" target="_blank" className="magnetic block font-display font-semibold text-lg md:text-2xl hover:text-[var(--brass)] transition-colors mb-3">
               kndesignspace@gmail.com
             </a>
-            <a href="tel:+250788841556" className="magnetic block font-display font-semibold  text-lg md:text-2xl opacity-75 hover:text-[var(--brass)] transition-colors mb-3">
+            <a href="tel:+250788841556" className="magnetic block font-display font-semibold  text-lg md:text-2xl opacity-85 hover:text-[var(--brass)] transition-colors mb-3">
               +250 788 841 556
             </a>
 
@@ -401,7 +401,14 @@ export default function Home() {
     </span>
     <span className="font-mono text-[10px] uppercase group-hover:text-[var(--brass)] transition-all">LinkedIn</span>
   </a>
-
+   <a href="#" aria-label="X (Twitter)" className="magnetic group flex flex-col items-center gap-1.5">
+  <span className="w-30 h-30 rounded-full border border-[var(--line)] flex items-center justify-center group-hover:bg-[var(--ink)] group-hover:text-[var(--paper-light)] transition-colors">
+    <svg viewBox="0 0 24 24" className="w-12.5 h-12.5 md:w-8 md:h-8 fill-current">
+      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+    </svg>
+  </span>
+  <span className="font-mono text-[10px] uppercase opacity-60 group-hover:opacity-100 group-hover:text-[var(--brass)] transition-all">X</span>
+</a>
   </div>
   </div>
 </div> 

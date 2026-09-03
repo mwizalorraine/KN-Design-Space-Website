@@ -59,7 +59,7 @@ export default function CategoryPage() {
         <div className="grid md:grid-cols-3 gap-[2px] bg-[var(--line)]">
           {projects.length === 0 && (
             <div className="bg-[var(--paper)] p-8 font-mono text-sm opacity-60 md:col-span-3">
-              Something went wrong. Try again
+              Something went wrong. Try again!
             </div>
           )}
           {projects.map((p) => (

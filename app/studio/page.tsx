@@ -35,7 +35,7 @@ export default function Studio() {
       <NavOverlay />
 
       <section className="px-12 pt-20 pb-16 max-w-3xl">
-        <div className="font-serif italic text-lg opacity-75 mb-3">The studio.</div>
+        <div className="font-serif italic text-lg opacity-75 mb-3">The Studio.</div>
         <h1 className="font-display font-semibold text-[clamp(30px,5vw,52px)] leading-tight mb-6">
           Designed by people, not templates.
         </h1>
@@ -85,7 +85,7 @@ export default function Studio() {
 
       <section className="px-12 py-20 bg-[var(--charcoal)] text-[var(--on-dark)] flex flex-col md:flex-row justify-between items-start md:items-end gap-8">
         <h2 className="font-display font-semibold text-[clamp(28px,4vw,42px)] max-w-[16ch] leading-tight">
-          Want to work with the studio?
+          Want to work with the TEAM?
         </h2>
         
         <a  href="/contact"
