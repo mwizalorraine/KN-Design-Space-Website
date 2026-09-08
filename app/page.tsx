@@ -7,9 +7,10 @@ import Cursor from './components/Cursor ';
 import WelcomeSplash from './components/WelcomeSplash'; 
 import { Bebas_Neue } from "next/font/google";
 
+
 const bebasNeue = Bebas_Neue({
   weight: "400",
-  subsets: ["latin"],
+  subsets: ["latin"], 
 });
 
 
@@ -22,6 +23,7 @@ const categoryLabels: Record<string, string> = {
   institutional: 'Institutional & Hospitality',
   residential: 'Residential Design',
   concept: 'Concept Studies',
+  interior: 'Interior Design',
 };
 
 type Project = {
@@ -105,13 +107,13 @@ export default function Home() {
   <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-black/10" />
   
   <div className="relative h-full flex flex-col justify-end px-6 md:px-12 pb-10 md:pb-16 text-[var(--on-dark)]">
-    <div className="font-serif italic text-lg opacity-85 mb-4">Transforming lives through architecture.</div>
+    <div className="font-serif italic text-xl md:text-[40px] opacity-85 mb-4">Transforming lives through architecture.</div>
     <motion.h1
       initial={{ opacity: 0, y: 24}}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 3 }} 
       className="font-display font-bold uppercase text-[clamp(32px,8vw,96px)] leading-[0.94] tracking-tight max-w-[16ch] text-balance">
-      Spaces built around{' '}
+      Spaces built around YOU{' '}
       <span className="relative inline-block h-[1em] overflow-hidden align-bottom">
         {rotatorWords.map((w, i) => (
           <motion.span
@@ -130,9 +132,9 @@ export default function Home() {
       initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, delay: 0.4 }}
-      className="max-w-[46ch] text-[17px] leading-relaxed opacity-90 text-balance mt-7"
+      className="max-w-[46ch] text-base md:text-[25px] leading-relaxed opacity-90 text-balance mt-1"
     >
-      KN Design Space is a Kigali-based architecture and design practice creating thoughtful, contemporary spaces that serve people and communities.
+      KN Design Space is a Kigali-based architecture and design practice, designing across a wide range of sectors to create spaces that serve the people & communities who use them.
     </motion.p>
 
     <motion.div
@@ -144,7 +146,7 @@ export default function Home() {
       <a href="#projects" className="magnetic font-mono text-xs uppercase px-5 py-2.5 rounded-full bg-[var(--on-dark)] text-[var(--charcoal)]">View Projects →</a>
       <a href="/contact" className="magnetic font-mono text-xs uppercase px-5 py-2.5 rounded-full border border-[var(--on-dark)]">Start a project</a>
     </motion.div>
-  </div>
+      </div>
 </section>
 
       <div className="bg-[var(--charcoal)] text-[var(--on-dark)] py-3.5 overflow-hidden border-y border-[var(--line)]">
@@ -160,8 +162,8 @@ export default function Home() {
               Land Use Advisory <span className="mx-9">—</span>
               Construction Supervision <span className="mx-9">—</span>
               Permitting and Approvals <span className="mx-9">—</span>
-            </span>
-          ))}
+            </span> 
+          ))} 
         </div>
       </div>
 
@@ -227,19 +229,19 @@ export default function Home() {
         ],
       },
       {
-        title: 'Project Engineering',
+        title: 'Project Engineering', 
         icon: <img src="/images/files/Proj_Engineering.png" alt="" className="w-10 h-10 md:w-14 md:h-14 service-icon" />,
         items: [
           {
-            label: 'Structural Design',
+            label: 'Structural Design', 
             icon: <img src="/images/files/Structural_Design.png" alt="" className="w-10 h-10 service-icon" />,
           },
           {
-            label: 'Electrical Design',
+            label: 'Electrical Design', 
             icon: <img src="/images/files/Electrical_Design.png" alt="" className="w-10 h-10 service-icon" />,
           },
           {
-            label: 'Mechanical and Plumbing Design',
+            label: 'Mechanical and Plumbing Design', 
             icon: <img src="/images/files/Mechanical_Plumbing.png" alt="" className="w-10 h-10 service-icon" />,
           },
         ],
@@ -259,7 +261,7 @@ export default function Home() {
           {
             label: 'Construction Supervision',
             icon: <img src="/images/files/construction-supervision.png" alt="" className="w-10 h-10 service-icon" />,
-          },
+          }, 
         ],
       },
     ].map((cat) => (
@@ -282,12 +284,13 @@ export default function Home() {
   </div>
 </section>
 
-      <section className="grid md:grid-cols-4 gap-6 px-12 py-20" id="process">
+      <section className="grid md:grid-cols-5 gap-6 px-12 py-20 text-balance" id="process">
         {[
           ['01 / Brief', 'Listen & Survey', 'Site visit, constraints, budget and how the space needs to be lived in.'],
           ['02 / Concept', 'Sketch & Test', 'Early massing and plan options, reviewed together before we commit.'],
-          ['03 / Drawings', 'Design Development', 'Detailed drawings, materials and approvals ready for construction.'],
-          ['04 / Build', 'Site Delivery', 'Contractor coordination and site visits through to handover.'],
+          ['03 / Drawings', 'Design Development', 'Detailed drawings and materials,taken through regulatory approval and signed off with you before construction begins.'],
+          ['04 / Build', 'Site Delivery', 'Contractor coordination and regular site visits, with progress shared through to handover.'],
+          ['05 / Aftercare', 'Handover & Support', 'As-built drawings, defects follow-up and guidance for the first months of use.'],
         ].map(([num, title, desc], i) => (
           <motion.div
             key={num}
@@ -320,29 +323,29 @@ export default function Home() {
             Start a project →
           </a>
         </div>
-        <div className="flex grid md:grid-cols-3 items-center gap-7 md:gap-3 mb-8">
+        <div className="grid md:grid-cols-3 gap-7 md:gap-3 mb-8">
         <div className="flex items-center gap-3">
-            <svg viewBox="0 0 24 24" className="w-4.5 h-4.5 stroke-[var(--brass)] fill-none" strokeWidth="1.8"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 3" /></svg>
+            <svg viewBox="0 0 24 24" className="w-7.5 h-7.5 stroke-[var(--brass)] fill-none" strokeWidth="1.8"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 3" /></svg>
             <div>
-              <div className="font-mono text-[10px] uppercase opacity-50">Response Time</div>
-              <div className="font-mono text-xs uppercase">Within 2 Business Days</div>
+              <div className="font-mono text-xs md:text-[17px] uppercase opacity-50">Response Time</div>
+              <div className="font-mono text-xs md:text-[17px] uppercase ">Within 2 Business Days</div>
             </div>
           </div>
           <div className="flex items-center gap-3">
-            <svg viewBox="0 0 24 24" className="w-4.5 h-4.5 stroke-[var(--brass)] fill-none" strokeWidth="1.8"><rect x="3" y="4" width="18" height="17" rx="2" /><path d="M3 9h18M8 2v4M16 2v4" /></svg>
+            <svg viewBox="0 0 24 24" className="w-7.5 h-7.5 stroke-[var(--brass)] fill-none" strokeWidth="1.8"><rect x="3" y="4" width="18" height="17" rx="2" /><path d="M3 9h18M8 2v4M16 2v4" /></svg>
             <div>
-              <div className="font-mono text-[10px] uppercase opacity-50">Office Hours</div>
-              <div className="font-mono text-xs uppercase">Mon–Fri, 9:00–17:00 CAT</div>
+              <div className="font-mono text-xs md:text-[17px] uppercase opacity-50">Office Hours</div>
+              <div className="font-mono text-xs md:text-[17px] uppercase ">Mon–Fri, 9:00–17:00 CAT</div>
             </div>
-          </div>
+          </div> 
           <div className="flex items-center gap-3">
-            <svg viewBox="0 0 24 24" className="w-4.5 h-4.5 stroke-[var(--brass)] fill-none" strokeWidth="1.8"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" /></svg>
+            <svg viewBox="0 0 24 24" className="w-7.5 h-7.5 stroke-[var(--brass)] fill-none" strokeWidth="1.8"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" /></svg>
             <div>
-              <div className="font-mono text-[10px] uppercase opacity-50">Preferred</div>
-              <div className="font-mono text-xs uppercase">Email or WhatsApp</div>
+              <div className="font-mono text-xs md:text-[17px] uppercase opacity-50">Preferred</div> 
+              <div className="font-mono text-[17px] uppercase">Email or WhatsApp</div>
             </div>
           </div>
-          </div>
+          </div> 
 
         {/* MAP + DIRECT — one balanced row */}
         <div className="grid md:grid-cols-2 gap-10 md:gap-20 mb-8">
@@ -353,7 +356,7 @@ export default function Home() {
                 width="100%"  
                 height="100%" 
                 style={{ border: 10, filter: 'grayscale(20%)' }}
-                loading="lazy"
+                loading="lazy" 
                 title="KN Design Space office location"
               />
             </div>
@@ -368,25 +371,31 @@ export default function Home() {
               Get directions → 
             </a>
           </div>
-
-          <div className="flex flex-col justify-center">
-            <div className="font-mono text-[10px] uppercase text-[var(--brass)] mb-3">Direct</div>
-            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=kndesignspace@gmail.com" target="_blank" className="magnetic block font-display font-semibold text-lg md:text-2xl hover:text-[var(--brass)] transition-colors mb-3">
-              kndesignspace@gmail.com
-            </a>
-            <a href="tel:+250788841556" className="magnetic block font-display font-semibold  text-lg md:text-2xl opacity-85 hover:text-[var(--brass)] transition-colors mb-3">
-              +250 788 841 556
-            </a>
-
-            <div className="font-mono text-[10px] uppercase text-[var(--brass)] mb-3">REACH US ON</div>
+        <div className="flex flex-col justify-center">
+  <div className="flex flex-wrap gap-x-12 gap-y-6 mb-6">
+    <div>
+      <div className="font-mono text-[13px] uppercase text-[var(--brass)] mb-2">Email</div>
+      <a href="https://mail.google.com/mail/?view=cm&fs=1&to=kndesignspace@gmail.com" target="_blank" className="magnetic font-display font-semibold text-lg md:text-2xl hover:text-[var(--brass)] transition-colors">
+        kndesignspace@gmail.com
+      </a>
+    </div>
+    <div>
+      <div className="font-mono text-[13px] uppercase text-[var(--brass)] mb-2">Phone</div>
+      <a href="tel:+250788841556" className="magnetic font-display font-semibold text-lg md:text-2xl hover:text-[var(--brass)] transition-colors">
+        +250 788 841 556
+      </a>
+    </div>
+  </div>
+            <div className="font-mono text-[15px] uppercase text-[var(--brass)] mt-6 mb-3">REACH US ON</div>
             <div className="flex gap-5">
           
+  
   <a href="https://wa.me/250788841556" target="_blank" aria-label="WhatsApp" className="magnetic group flex flex-col items-center gap-1.5">
     <span className="w-30 h-30 rounded-full border border-[var(--line)] flex items-center justify-center group-hover:bg-[var(--ink)] group-hover:text-[var(--paper-light)] transition-colors">
       <svg viewBox="0 0 24 24" className="w-12.5 h-12.5 fill-current"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.36 5.07L2 22l5.07-1.33A9.94 9.94 0 0012 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm5.2 14.2c-.22.62-1.28 1.18-1.77 1.25-.45.07-1.02.1-1.65-.1-.38-.12-.87-.28-1.5-.55-2.64-1.14-4.36-3.8-4.5-3.98-.13-.18-1.08-1.43-1.08-2.73 0-1.3.68-1.93.92-2.2.24-.26.53-.33.7-.33h.5c.16 0 .38-.06.6.45.22.53.75 1.83.82 1.96.07.13.11.29.02.47-.09.18-.14.29-.27.44-.13.16-.28.35-.4.47-.13.13-.27.27-.12.53.16.26.7 1.15 1.5 1.86 1.03.92 1.9 1.2 2.16 1.34.26.13.42.11.57-.07.16-.18.66-.77.84-1.04.18-.26.35-.22.6-.13.24.09 1.53.72 1.79.85.26.13.44.2.5.31.07.11.07.65-.15 1.27z" /></svg>
-    </span>
+    </span> 
     <span className="font-mono text-[10px] uppercase opacity-60 group-hover:opacity-100 group-hover:text-[var(--brass)] transition-all">WhatsApp</span>
-  </a>
+  </a> 
    
   <a href="https://www.instagram.com/kn_design_space/" target="_blank" aria-label="Instagram" className="magnetic group flex flex-col items-center gap-1.5">
     <span className="w-30 h-30 rounded-full border border-[var(--line)] flex items-center justify-center group-hover:bg-[var(--ink)] group-hover:text-[var(--paper-light)] transition-colors">
@@ -399,13 +408,13 @@ export default function Home() {
     <span className="w-30 h-30 rounded-full border border-[var(--line)] flex items-center justify-center group-hover:bg-[var(--ink)] group-hover:text-[var(--paper-light)] transition-colors">
       <svg viewBox="0 0 24 24" className="w-12.5 h-12.5 fill-current"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.03-1.85-3.03-1.85 0-2.14 1.45-2.14 2.94v5.66H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 110-4.13 2.07 2.07 0 010 4.13zM7.12 20.45H3.56V9h3.56v11.45z" /></svg>
     </span>
-    <span className="font-mono text-[10px] uppercase group-hover:text-[var(--brass)] transition-all">LinkedIn</span>
+    <span className="font-mono text-[10px] uppercase opacity-60 group-hover:text-[var(--brass)] transition-all">LinkedIn</span>
   </a>
    <a href="#" aria-label="X (Twitter)" className="magnetic group flex flex-col items-center gap-1.5">
   <span className="w-30 h-30 rounded-full border border-[var(--line)] flex items-center justify-center group-hover:bg-[var(--ink)] group-hover:text-[var(--paper-light)] transition-colors">
     <svg viewBox="0 0 24 24" className="w-12.5 h-12.5 md:w-8 md:h-8 fill-current">
       <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-    </svg>
+    </svg> 
   </span>
   <span className="font-mono text-[10px] uppercase opacity-60 group-hover:opacity-100 group-hover:text-[var(--brass)] transition-all">X</span>
 </a>

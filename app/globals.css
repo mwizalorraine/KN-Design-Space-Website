@@ -39,7 +39,7 @@ body{
   cursor: none;
 }
 @media (max-width: 900px){
-  body{ cursor:auto; }
+  body{ cursor:auto; } 
 }
 
 #cursor{
@@ -50,7 +50,7 @@ body{
   mix-blend-mode:difference;
 }
 #cursor.magnet{ width:56px; height:56px; background:var(--brass); }
-@media (max-width:900px){ #cursor{display:none;} }
+@media (max-width:900px){ #cursor{display:none;} } 
 
 .ticker-track{
   display:flex; width:max-content;
