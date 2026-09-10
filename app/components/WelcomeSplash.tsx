@@ -30,7 +30,7 @@ export default function WelcomeSplash() {
         requestAnimationFrame(tick);
       } else {
         sessionStorage.setItem('kn_welcome_seen', 'true');
-        setShow(false);
+        setShow(false); 
       }
     };
     requestAnimationFrame(tick);
@@ -103,7 +103,7 @@ const revealedCount = Math.floor((progress / 100) * WELCOME_TEXT.length);
                 Loading — {progress}%
               </div>
             </motion.div>
-          </div>
+          </div> 
         </motion.div>
       )}
     </AnimatePresence>

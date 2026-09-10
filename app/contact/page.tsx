@@ -41,7 +41,7 @@ export default function Contact() {
       {/* HERO STRIP */}
       <section className="px-12 pt-20 pb-14 border-b border-[var(--line)]">
         <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-          <div className="font-serif italic text-lg opacity-75 mb-3">Transforming lives through architecture.</div>
+          <div className="font-serif italic text-xl md:text-[30px] opacity-75 mb-3">Transforming lives through architecture.</div>
           <h1 className="font-display font-semibold text-[clamp(36px,5.5vw,62px)] leading-[1.02] max-w-[16ch]">
             Have a site in mind? Let&apos;s design it.
           </h1>
@@ -53,23 +53,23 @@ export default function Contact() {
           className="flex flex-wrap gap-x-16 gap-y-4 mt-10"
         >
           <div className="flex items-center gap-3">
-            <svg viewBox="0 0 24 24" className="w-4.5 h-4.5 stroke-[var(--brass)] fill-none" strokeWidth="1.8"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 3" /></svg>
+            <svg viewBox="0 0 24 24" className="w-6.5 h-6.5 stroke-[var(--brass)] fill-none" strokeWidth="1.8"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 3" /></svg>
             <div>
-              <div className="font-mono text-[10px] uppercase opacity-50">Response Time</div>
+              <div className="font-mono md:text-[17px] uppercase opacity-50">Response Time</div>
               <div className="font-mono text-xs uppercase">Within 2 Business Days</div>
             </div>
           </div>
           <div className="flex items-center gap-3">
-            <svg viewBox="0 0 24 24" className="w-4.5 h-4.5 stroke-[var(--brass)] fill-none" strokeWidth="1.8"><rect x="3" y="4" width="18" height="17" rx="2" /><path d="M3 9h18M8 2v4M16 2v4" /></svg>
+            <svg viewBox="0 0 24 24" className="w-6.5 h-6.5 stroke-[var(--brass)] fill-none" strokeWidth="1.8"><rect x="3" y="4" width="18" height="17" rx="2" /><path d="M3 9h18M8 2v4M16 2v4" /></svg>
             <div>
-              <div className="font-mono text-[10px] uppercase opacity-50">Office Hours</div>
+              <div className="font-mono md:text-[17px] uppercase opacity-50">Office Hours</div>
               <div className="font-mono text-xs uppercase">Mon–Fri, 9:00–17:00 CAT</div>
             </div>
           </div>
           <div className="flex items-center gap-3">
-            <svg viewBox="0 0 24 24" className="w-4.5 h-4.5 stroke-[var(--brass)] fill-none" strokeWidth="1.8"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" /></svg>
+            <svg viewBox="0 0 24 24" className="w-6.5 h-6.5 stroke-[var(--brass)] fill-none" strokeWidth="1.8"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" /></svg>
             <div>
-              <div className="font-mono text-[10px] uppercase opacity-50">Preferred</div>
+              <div className="font-mono md:text-[17px] uppercase opacity-50">Preferred</div>
               <div className="font-mono text-xs uppercase">Email or WhatsApp</div>
             </div>
           </div>
@@ -85,7 +85,7 @@ export default function Contact() {
           transition={{ duration: 0.6 }}
           className="px-12 py-16"
         >
-          <div className="font-mono text-xs uppercase text-[var(--brass)] mb-8">Tell us about your project</div>
+          <div className="font-mono text-2xs uppercase text-[var(--brass)] mb-8">Tell us about your project</div>
 
           {status === 'sent' ? (
             <div className="border border-[var(--line)] bg-[var(--paper-light)] p-8">
@@ -95,17 +95,17 @@ export default function Contact() {
           ) : (
             <form onSubmit={handleSubmit} className="space-y-7 max-w-md">
               <div>
-                <label className="font-mono text-xs uppercase opacity-65 block mb-2">Name</label>
+                <label className="font-mono text-2xs uppercase opacity-65 block mb-2">Name</label>
                 <input
                   required
                   name="name"
-                  value={form.name}
+                  value={form.name} 
                   onChange={handleChange}
                   className="w-full bg-transparent border-b border-[var(--line)] py-3 outline-none focus:border-[var(--brass)] transition-colors"
                 />
               </div>
               <div>
-                <label className="font-mono text-xs uppercase opacity-65 block mb-2">Email</label>
+                <label className="font-mono text-2xs uppercase opacity-65 block mb-2">Email</label>
                 <input
                   required
                   type="email"
@@ -116,7 +116,7 @@ export default function Contact() {
                 />
               </div>
               <div>
-                <label className="font-mono text-xs uppercase opacity-65 block mb-2">Phone (optional)</label>
+                <label className="font-mono text-2xs uppercase opacity-65 block mb-2">Phone (optional)</label>
                 <input
                   name="phone"
                   value={form.phone}
@@ -125,7 +125,7 @@ export default function Contact() {
                 />
               </div>
               <div>
-                <label className="font-mono text-xs uppercase opacity-65 block mb-2">Message</label>
+                <label className="font-mono text-2xs uppercase opacity-65 block mb-2">Message</label>
                 <textarea
                   required
                   name="message"
@@ -162,7 +162,7 @@ export default function Contact() {
           transition={{ duration: 0.6, delay: 0.1 }}
           className="px-12 py-16"
         >
-          <div className="font-mono text-xs uppercase text-[var(--brass)] mb-4">Studio Location</div>
+          <div className="font-mono text-2xs uppercase text-[var(--brass)] mb-4">Studio Location</div>
 
           <div className="border border-[var(--ink)] p-3">
             <div className="overflow-hidden" style={{ height: '260px' }}>
@@ -183,33 +183,33 @@ export default function Contact() {
           <a
             href={directionsHref}
             target="_blank"
-            className="magnetic inline-flex items-center gap-2 font-mono text-xs uppercase px-5 py-2.5 rounded-full bg-[var(--brass)] text-[var(--paper-light)] mt-4 mb-14"
+            className="magnetic inline-flex items-center gap-2 font-mono text-2xs uppercase px-5 py-2.5 rounded-full bg-[var(--brass)] text-[var(--paper-light)] mt-4 mb-14"
           >
             Get directions →
           </a>
 
           <div className="border-t border-[var(--line)] pt-10 flex items-start justify-between flex-wrap gap-8">
             <div>
-              <div className="font-mono text-xs uppercase text-[var(--brass)] mb-3">Direct</div>
-              <a href="https://mail.google.com/mail/?view=cm&fs=1&to=kndesignspace@gmail.com" target="_blank" className="magnetic block font-display font-semibold text-xl hover:text-[var(--brass)] transition-colors mb-1">
+              <div className="font-mono text-2xs uppercase text-[var(--brass)] mb-3">Direct</div>
+              <a href="https://mail.google.com/mail/?view=cm&fs=1&to=kndesignspace@gmail.com" target="_blank" className="magnetic block font-display font-semibold text-2xl hover:text-[var(--brass)] transition-colors mb-1">
                 kndesignspace@gmail.com
               </a>
-              <a href="tel:+250788841556" className="magnetic block text-sm opacity-80 hover:text-[var(--brass)] transition-colors">
+              <a href="tel:+250788841556" className="magnetic block text-2xl opacity-80 hover:text-[var(--brass)] transition-colors">
                 +250 788 841 556
               </a>
             </div>
 
             <div>
-              <div className="font-mono text-xs uppercase text-[var(--brass)] mb-3">Follow</div>
+              <div className="font-mono text-2xs uppercase text-[var(--brass)] mb-3">Follow</div>
               <div className="flex gap-2.5">
                 <a href="https://wa.me/250788841556" target="_blank" className="magnetic w-10 h-10 rounded-full border border-[var(--line)] flex items-center justify-center hover:bg-[var(--ink)] hover:text-[var(--paper-light)] transition-colors">
-                  <svg viewBox="0 0 24 24" className="w-4.5 h-4.5 fill-current"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.36 5.07L2 22l5.07-1.33A9.94 9.94 0 0012 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm5.2 14.2c-.22.62-1.28 1.18-1.77 1.25-.45.07-1.02.1-1.65-.1-.38-.12-.87-.28-1.5-.55-2.64-1.14-4.36-3.8-4.5-3.98-.13-.18-1.08-1.43-1.08-2.73 0-1.3.68-1.93.92-2.2.24-.26.53-.33.7-.33h.5c.16 0 .38-.06.6.45.22.53.75 1.83.82 1.96.07.13.11.29.02.47-.09.18-.14.29-.27.44-.13.16-.28.35-.4.47-.13.13-.27.27-.12.53.16.26.7 1.15 1.5 1.86 1.03.92 1.9 1.2 2.16 1.34.26.13.42.11.57-.07.16-.18.66-.77.84-1.04.18-.26.35-.22.6-.13.24.09 1.53.72 1.79.85.26.13.44.2.5.31.07.11.07.65-.15 1.27z" /></svg>
+                  <svg viewBox="0 0 24 24" className="w-6.5 h-6.5 fill-current"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.36 5.07L2 22l5.07-1.33A9.94 9.94 0 0012 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm5.2 14.2c-.22.62-1.28 1.18-1.77 1.25-.45.07-1.02.1-1.65-.1-.38-.12-.87-.28-1.5-.55-2.64-1.14-4.36-3.8-4.5-3.98-.13-.18-1.08-1.43-1.08-2.73 0-1.3.68-1.93.92-2.2.24-.26.53-.33.7-.33h.5c.16 0 .38-.06.6.45.22.53.75 1.83.82 1.96.07.13.11.29.02.47-.09.18-.14.29-.27.44-.13.16-.28.35-.4.47-.13.13-.27.27-.12.53.16.26.7 1.15 1.5 1.86 1.03.92 1.9 1.2 2.16 1.34.26.13.42.11.57-.07.16-.18.66-.77.84-1.04.18-.26.35-.22.6-.13.24.09 1.53.72 1.79.85.26.13.44.2.5.31.07.11.07.65-.15 1.27z" /></svg>
                 </a>
                 <a href="https://www.instagram.com/kn_design_space/" target="_blank" className="magnetic w-10 h-10 rounded-full border border-[var(--line)] flex items-center justify-center hover:bg-[var(--ink)] hover:text-[var(--paper-light)] transition-colors">
-                  <svg viewBox="0 0 24 24" className="w-4.5 h-4.5 fill-current"><path d="M12 2c2.7 0 3.05.01 4.12.06 1.06.05 1.79.22 2.43.47.66.26 1.21.6 1.76 1.15.55.55.89 1.1 1.15 1.76.25.64.42 1.37.47 2.43.05 1.07.06 1.42.06 4.12s-.01 3.05-.06 4.12c-.05 1.06-.22 1.79-.47 2.43a4.9 4.9 0 01-1.15 1.76 4.9 4.9 0 01-1.76 1.15c-.64.25-1.37.42-2.43.47-1.07.05-1.42.06-4.12.06s-3.05-.01-4.12-.06c-1.06-.05-1.79-.22-2.43-.47a4.9 4.9 0 01-1.76-1.15 4.9 4.9 0 01-1.15-1.76c-.25-.64-.42-1.37-.47-2.43C2.01 15.05 2 14.7 2 12s.01-3.05.06-4.12c.05-1.06.22-1.79.47-2.43.26-.66.6-1.21 1.15-1.76A4.9 4.9 0 015.44 2.53c.64-.25 1.37-.42 2.43-.47C8.95 2.01 9.3 2 12 2zm0 5a5 5 0 100 10 5 5 0 000-10zm0 8.2a3.2 3.2 0 110-6.4 3.2 3.2 0 010 6.4zm5.2-8.4a1.17 1.17 0 100-2.34 1.17 1.17 0 000 2.34z" /></svg>
+                  <svg viewBox="0 0 24 24" className="w-6.5 h-6.5 fill-current"><path d="M12 2c2.7 0 3.05.01 4.12.06 1.06.05 1.79.22 2.43.47.66.26 1.21.6 1.76 1.15.55.55.89 1.1 1.15 1.76.25.64.42 1.37.47 2.43.05 1.07.06 1.42.06 4.12s-.01 3.05-.06 4.12c-.05 1.06-.22 1.79-.47 2.43a4.9 4.9 0 01-1.15 1.76 4.9 4.9 0 01-1.76 1.15c-.64.25-1.37.42-2.43.47-1.07.05-1.42.06-4.12.06s-3.05-.01-4.12-.06c-1.06-.05-1.79-.22-2.43-.47a4.9 4.9 0 01-1.76-1.15 4.9 4.9 0 01-1.15-1.76c-.25-.64-.42-1.37-.47-2.43C2.01 15.05 2 14.7 2 12s.01-3.05.06-4.12c.05-1.06.22-1.79.47-2.43.26-.66.6-1.21 1.15-1.76A4.9 4.9 0 015.44 2.53c.64-.25 1.37-.42 2.43-.47C8.95 2.01 9.3 2 12 2zm0 5a5 5 0 100 10 5 5 0 000-10zm0 8.2a3.2 3.2 0 110-6.4 3.2 3.2 0 010 6.4zm5.2-8.4a1.17 1.17 0 100-2.34 1.17 1.17 0 000 2.34z" /></svg>
                 </a>
-                <a href="#" className="magnetic w-10 h-10 rounded-full border border-[var(--line)] flex items-center justify-center opacity-35 hover:opacity-100 hover:bg-[var(--ink)] hover:text-[var(--paper-light)] transition-colors" title="Add real LinkedIn link">
-                  <svg viewBox="0 0 24 24" className="w-4.5 h-4.5 fill-current"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.03-1.85-3.03-1.85 0-2.14 1.45-2.14 2.94v5.66H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 110-4.13 2.07 2.07 0 010 4.13zM7.12 20.45H3.56V9h3.56v11.45z" /></svg>
+                <a href="#" className="magnetic w-10 h-10 rounded-full border border-[var(--line)] flex items-center justify-center opacity-100 hover:opacity-100 hover:bg-[var(--ink)] hover:text-[var(--paper-light)] transition-colors" title="Add real LinkedIn link">
+                  <svg viewBox="0 0 24 24" className="w-6.5 h-6.5 fill-current"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.03-1.85-3.03-1.85 0-2.14 1.45-2.14 2.94v5.66H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 110-4.13 2.07 2.07 0 010 4.13zM7.12 20.45H3.56V9h3.56v11.45z" /></svg>
                 </a>
               </div>
             </div>

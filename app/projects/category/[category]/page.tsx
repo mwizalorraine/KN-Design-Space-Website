@@ -12,6 +12,7 @@ const categoryLabels: Record<string, string> = {
   institutional: 'Institutional & Hospitality',
   residential: 'Residential Design',
   concept: 'Concept Studies',
+  interior: 'Interior Design', 
 };
 
 type Project = {
@@ -59,7 +60,7 @@ export default function CategoryPage() {
         <div className="grid md:grid-cols-3 gap-[2px] bg-[var(--line)]">
           {projects.length === 0 && (
             <div className="bg-[var(--paper)] p-8 font-mono text-sm opacity-60 md:col-span-3">
-              Something went wrong. Try again
+              Something went wrong. Try again!
             </div>
           )}
           {projects.map((p) => (
@@ -67,7 +68,7 @@ export default function CategoryPage() {
               href={`/projects/${p.slug}`}
               key={p.id}
               className="magnetic cursor-none bg-[var(--paper)] p-6 min-h-[280px] flex flex-col justify-end relative overflow-hidden group"
-            >
+            > 
               {p.cover_image ? (
                 <img
                   src={p.cover_image}
