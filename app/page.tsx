@@ -98,7 +98,7 @@ export default function Home() {
       <Cursor />
       <NavOverlay />
       
-      <section id="home-sentinel" className="relative w-full h-[102vh] min-h-[660px] overflow-hidden">
+      <section id="home-sentinel" className="relative w-full h-[70vh] md:h-[102vh] min-h-[480px] md:min-h-[660px] overflow-hidden">
   <img
     src="/images/night view.png"
     alt="KN Design Space project"

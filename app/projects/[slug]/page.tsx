@@ -360,7 +360,7 @@ export default function ProjectDetail() {
       <NavOverlay />
 
       {/* FULL-SCREEN HERO — same for every category */}
-      <section className="relative w-full h-screen overflow-hidden">
+      <section className="relative w-full h-[60vh] md:h-[90vh] min-h-[420px] md:min-h-[560px] overflow-hidden">
         {project.cover_image ? (
           <img src={project.cover_image} alt={project.title} className="absolute inset-0 w-full h-full object-cover" />
         ) : (
