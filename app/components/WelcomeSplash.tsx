@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 
 export default function WelcomeSplash() {
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState(true);
   const [progress, setProgress] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
   const WELCOME_TEXT = "Transforming Lives Through Architecture    ...";

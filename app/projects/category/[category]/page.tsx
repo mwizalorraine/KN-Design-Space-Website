@@ -12,7 +12,7 @@ const categoryLabels: Record<string, string> = {
   institutional: 'Institutional & Hospitality',
   residential: 'Residential Design',
   concept: 'Concept Studies',
-  interior: 'Interior Design',
+  interior: 'Interior Design', 
 };
 
 type Project = {

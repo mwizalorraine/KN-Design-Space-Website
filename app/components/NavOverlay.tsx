@@ -40,31 +40,36 @@ export default function NavOverlay() {
   window.addEventListener('scroll', onScroll, { passive: true });
   return () => window.removeEventListener('scroll', onScroll);
 }, []);
+useEffect(() => {
+  if (pathname !== '/') return;
+  const homeEl = document.getElementById('home-sentinel');
+  const projectsEl = document.getElementById('projects');
+  const servicesEl = document.getElementById('services');
+  const targets = [homeEl, projectsEl, servicesEl].filter(Boolean) as HTMLElement[];
+  if (targets.length === 0) return;
 
-  useEffect(() => {
-    if (pathname !== '/') return;
-    const projectsEl = document.getElementById('projects');
-    const servicesEl = document.getElementById('services');
-    if (!projectsEl && !servicesEl) return;
+  const observer = new IntersectionObserver(
+    (entries) => {
+      const visible = entries
+        .filter((e) => e.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries.filter((e) => e.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (visible) {
-          setActiveSection(visible.target.id);
-        } else if (window.scrollY < 200) {
-          setActiveSection('home');
-        }
-      },
-      { threshold: 0.3 }
-    );
-    if (projectsEl) observer.observe(projectsEl);
-    if (servicesEl) observer.observe(servicesEl);
-    return () => observer.disconnect();
-  }, [pathname]);
+      if (visible) {
+        setActiveSection(visible.target.id === 'home-sentinel' ? 'home' : visible.target.id);
+      } else {
+        // Not in any tracked section (e.g. scrolled into the footer/process area) — clear the highlight entirely
+        setActiveSection(null);
+      }
+    },
+    { threshold: 0.3 }
+  );
+
+  targets.forEach((t) => observer.observe(t));
+  return () => observer.disconnect();
+}, [pathname]);
 
   const isActive = (label: string) => {
-    if (label === 'Home') return pathname === '/' && (activeSection === 'home' || activeSection === null);
+    if (label === 'Home') return pathname === '/' && activeSection === 'home';
     if (label === 'Projects') return pathname.startsWith('/projects') || (pathname === '/' && activeSection === 'projects');
     if (label === 'Team') return pathname === '/studio';
     if (label === 'Services') return pathname === '/' && activeSection === 'services';

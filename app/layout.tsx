@@ -14,19 +14,19 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-<html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
-  <Script id="theme-init" strategy="beforeInteractive">
-    {`
-      (function() {
-        var saved = localStorage.getItem('kn_theme');
-        var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        var theme = saved ? saved : (prefersDark ? 'dark' : 'light');
-        document.documentElement.setAttribute('data-theme', theme);
-      })();
-    `}
-  </Script>
-</head>
+        <Script id="theme-init" strategy="beforeInteractive">
+          {`
+            (function() {
+              var saved = localStorage.getItem('kn_theme');
+              var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+              var theme = saved ? saved : (prefersDark ? 'dark' : 'light');
+              document.documentElement.setAttribute('data-theme', theme);
+            })();
+          `}
+        </Script>
+      </head>
       <body className={`${display.variable} ${serif.variable} ${mono.variable} font-serif`}>
         {children}
       </body>

@@ -2,16 +2,8 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Bebas_Neue, Cormorant, JetBrains_Mono } from 'next/font/google';
 import NavOverlay from '../../components/NavOverlay';
 import Cursor from '../../components/Cursor ';
-
-// Fonts loaded ONLY for this file, used ONLY on interior-category projects.
-// Your global layout.tsx fonts (Schibsted Grotesk / Newsreader / IBM Plex
-// Mono) are untouched — every other category still renders with those.
-const bebasNeue = Bebas_Neue({ subsets: ['latin'], weight: '400' });
-const cormorant = Cormorant({ subsets: ['latin'], style: ['italic'], weight: ['400', '500'] });
-const jetbrainsMono = JetBrains_Mono({ subsets: ['latin'], weight: ['400', '500'] });
 
 const categoryLabels: Record<string, string> = {
   education: 'Education & Institutional',
@@ -30,6 +22,7 @@ type GalleryImage = {
   order: number;
   image_type: 'gallery' | 'before' | 'after';
   pair_key: string;
+  section: string;
 };
 
 type Spec = {
@@ -101,7 +94,7 @@ function Slider({ images, title }: { images: GalleryImage[]; title: string }) {
               className="magnetic absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-[var(--ink)]/70 text-[var(--paper-light)] flex items-center justify-center backdrop-blur-sm"
               aria-label="Next image"
             >
-              → 
+              →
             </button>
           </>
         )}
@@ -132,7 +125,9 @@ function Slider({ images, title }: { images: GalleryImage[]; title: string }) {
   );
 }
 
-// --- Interior-only: spec list + paired before/after toggles ---
+// --- Interior-only: spec list + always-visible before/after pairs
+// (matches the source portfolio PDF: two stacked photos per view, both
+// visible, with a small BEFORE/AFTER tag — no click-to-toggle) ---
 
 function SpecList({ specs }: { specs: Spec[] }) {
   if (specs.length === 0) return null;
@@ -148,38 +143,121 @@ function SpecList({ specs }: { specs: Spec[] }) {
   );
 }
 
-function BeforeAfterTile({ before, after, alt }: { before: GalleryImage; after: GalleryImage; alt: string }) {
-  const [showBefore, setShowBefore] = useState(false);
+function BeforeAfterPair({
+  before,
+  after,
+  viewLabel,
+}: {
+  before: GalleryImage;
+  after: GalleryImage;
+  viewLabel: string;
+}) {
   return (
-    <button
-      type="button"
-      onClick={() => setShowBefore((v) => !v)}
-      aria-pressed={showBefore}
-      className="magnetic cursor-none relative aspect-[4/3] overflow-hidden block w-full"
-    >
-      <img
-        src={showBefore ? before.image : after.image}
-        alt={`${alt} — ${showBefore ? 'before' : 'after'}`}
-        className="w-full h-full object-cover"
-      />
-      <span className="absolute left-3 bottom-3 font-mono text-[10px] uppercase px-2.5 py-1 bg-[var(--ink)] text-[var(--paper)]">
-        {showBefore ? 'Before' : 'After'}
-      </span>
-    </button>
+    <div className="flex flex-col gap-3">
+      <div className="relative aspect-[4/3] overflow-hidden">
+        <img src={before.image} alt={`${viewLabel} — before`} className="w-full h-full object-cover" />
+        <span className="absolute left-3 top-3 font-mono text-[10px] uppercase px-2.5 py-1 bg-[var(--ink)] text-[var(--paper)]">
+          Before
+        </span>
+      </div>
+      <div className="relative aspect-[4/3] overflow-hidden">
+        <img src={after.image} alt={`${viewLabel} — after`} className="w-full h-full object-cover" />
+        <span className="absolute left-3 top-3 font-mono text-[10px] uppercase px-2.5 py-1 bg-[var(--ink)] text-[var(--paper)]">
+          After
+        </span>
+      </div>
+      <div className="font-mono text-[10px] uppercase opacity-50 text-center">{viewLabel}</div>
+    </div>
   );
 }
 
 function groupBeforeAfter(images: GalleryImage[]) {
-  const befores = images.filter((img) => img.image_type === 'before');
-  const afters = images.filter((img) => img.image_type === 'after');
+  const befores = [...images].filter((img) => img.image_type === 'before').sort((a, b) => a.order - b.order);
+  const afters = [...images].filter((img) => img.image_type === 'after').sort((a, b) => a.order - b.order);
+
+  // Prefer matching by explicit pair_key when both sides actually set one
+  // (e.g. both 'view-1'). If pair_key is blank — easy to forget in admin —
+  // fall back to matching by position, so pairs still come out correct as
+  // long as befores and afters were entered in the same view order.
   return befores
-    .map((before) => ({ before, after: afters.find((a) => a.pair_key === before.pair_key) }))
+    .map((before, i) => {
+      const matched = before.pair_key ? afters.find((a) => a.pair_key === before.pair_key) : undefined;
+      return { before, after: matched || afters[i] };
+    })
     .filter((pair): pair is { before: GalleryImage; after: GalleryImage } => Boolean(pair.after));
 }
 
+// Fixed eyebrow captions matching the source PDF's named galleries. A
+// section title not in this map (e.g. a future project's own section
+// names) just renders without an eyebrow — nothing breaks.
+const SECTION_SUBTITLES: Record<string, string> = {
+  'The Finished Space': 'Selected views',
+  'Reception': 'First impression & portfolio wall',
+  "Co-Working & Director's Office": "Meeting space, pin-up wall & MD office",
+  'As Built': 'The completed studio, photographed on site',
+};
+
+function groupBySection(images: GalleryImage[]) {
+  const named = [...images].filter((img) => img.section).sort((a, b) => a.order - b.order);
+  const order: string[] = [];
+  const groups: Record<string, GalleryImage[]> = {};
+  named.forEach((img) => {
+    if (!groups[img.section]) {
+      groups[img.section] = [];
+      order.push(img.section);
+    }
+    groups[img.section].push(img);
+  });
+  return order.map((title) => ({ title, images: groups[title] }));
+}
+
+// Matches the PDF's two recurring layouts: 3 photos -> one large + two
+// stacked; 4 photos -> an even 2x2 grid. Any other count falls back to a
+// simple even grid so nothing breaks if a project has a different amount.
+function GallerySection({ title, images }: { title: string; images: GalleryImage[] }) {
+  const subtitle = SECTION_SUBTITLES[title];
+
+  return (
+    <div className="pt-16 mt-16 mb-8 border-t border-[var(--line)]">
+      <div className="flex items-end justify-between mb-6">
+        <h4 className="font-display font-semibold text-2xl md:text-3xl">{title}</h4>
+        {subtitle && <span className="font-mono text-[11px] uppercase opacity-60">{subtitle}</span>}
+      </div>
+
+      {images.length === 3 ? (
+        <div className="grid md:grid-cols-[1.5fr_1fr] gap-3">
+          <img
+            src={images[0].image}
+            alt={images[0].caption || title}
+            className="w-full h-72 md:h-[600px] object-cover"
+          />
+          <div className="flex flex-col gap-3 h-72 md:h-[600px]">
+            <img src={images[1].image} alt={images[1].caption || title} className="w-full flex-1 object-cover" />
+            <img src={images[2].image} alt={images[2].caption || title} className="w-full flex-1 object-cover" />
+          </div>
+        </div>
+      ) : (
+        <div className="grid grid-cols-2 gap-3">
+          {images.map((img) => (
+            <img
+              key={img.id}
+              src={img.image}
+              alt={img.caption || title}
+              className="w-full aspect-[4/3] object-cover"
+            />
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
 function InteriorDetail({ project }: { project: Project }) {
-  const plainGallery = project.gallery.filter((img) => img.image_type === 'gallery');
+  const plainGallery = [...project.gallery]
+    .filter((img) => img.image_type === 'gallery' && !img.section)
+    .sort((a, b) => a.order - b.order);
   const pairs = groupBeforeAfter(project.gallery);
+  const sections = groupBySection(project.gallery.filter((img) => img.image_type === 'gallery'));
 
   return (
     <section className="max-w-5xl mx-auto px-6 py-20">
@@ -187,30 +265,41 @@ function InteriorDetail({ project }: { project: Project }) {
         <p className="text-[17px] leading-relaxed opacity-85 max-w-[62ch] mb-12">{project.summary}</p>
       )}
 
-      <div className="grid md:grid-cols-[1.5fr_1fr] gap-6 md:gap-10 items-start mb-12">
-        <div className="grid grid-cols-2 gap-3">
-          {plainGallery.map((img) => (
-            <img
-              key={img.id}
-              src={img.image}
-              alt={img.caption || project.title}
-              className="w-full aspect-[4/3] object-cover"
-            />
-          ))}
-        </div>
+      <div className="grid md:grid-cols-[1.5fr_1fr] gap-6 md:gap-10 items-stretch mb-12">
+        {plainGallery[0] && (
+          <img
+            src={plainGallery[0].image}
+            alt={plainGallery[0].caption || project.title}
+            className="w-full h-72 md:h-full object-cover"
+          />
+        )}
         <SpecList specs={project.specs} />
       </div>
 
       {pairs.length > 0 && (
         <>
-          <div className="font-mono text-xs uppercase text-[var(--brass)] mb-4">Before &amp; after — tap to compare</div>
-          <div className="grid grid-cols-3 gap-3">
-            {pairs.map((pair) => (
-              <BeforeAfterTile key={pair.before.pair_key} {...pair} alt={pair.before.caption || project.title} />
+          <div className="flex items-end justify-between mb-6">
+            <h4 className="font-display font-semibold text-2xl md:text-3xl">Before &amp; After</h4>
+            <span className="font-mono text-[11px] uppercase opacity-60">Same shell, reimagined interior</span>
+          </div>
+          <div
+            className="grid gap-4 mb-16"
+            style={{ gridTemplateColumns: `repeat(${pairs.length}, minmax(0, 1fr))` }}
+          >
+            {pairs.map((pair, i) => (
+              <BeforeAfterPair
+                key={pair.before.pair_key}
+                {...pair}
+                viewLabel={pair.before.caption || `View ${String(i + 1).padStart(2, '0')}`}
+              />
             ))}
-          </div> 
+          </div>
         </>
       )}
+
+      {sections.map((section) => (
+        <GallerySection key={section.title} title={section.title} images={section.images} />
+      ))}
 
       <div className="text-center mt-16">
         <a
@@ -223,6 +312,7 @@ function InteriorDetail({ project }: { project: Project }) {
     </section>
   );
 }
+
 
 export default function ProjectDetail() {
   const params = useParams();
@@ -278,7 +368,7 @@ export default function ProjectDetail() {
         )}
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/40" />
 
-        <div className="relative h-full flex flex-col justify-end px-12 pb-16 text-[var(--paper-light)]">
+        <div className="relative h-full flex flex-col justify-end px-12 pb-16 text-[var(--on-dark)]">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
             <div className="font-mono text-xs uppercase text-[var(--brass)] mb-4">
               {categoryLabels[project.category]} — {project.status}
@@ -290,7 +380,7 @@ export default function ProjectDetail() {
           </motion.div>
         </div>
 
-        <div className="absolute bottom-6 right-12 font-mono text-[10.5px] uppercase text-[var(--paper-light)]/60">
+        <div className="absolute bottom-6 right-12 font-mono text-[10.5px] uppercase text-[var(--on-dark)]/60">
           {project.title.toUpperCase()}
         </div>
       </section>
@@ -302,14 +392,14 @@ export default function ProjectDetail() {
             <div><span className="opacity-50 block mb-1">Location</span>{project.location}</div>
           )}
           {project.role && (
-            <div><span className="opacity-90 block mb-1">Role</span>{project.role}</div>
-          )}  
+            <div><span className="opacity-50 block mb-1">Role</span>{project.role}</div>
+          )}
           {project.year && (
             <div><span className="opacity-50 block mb-1">Year</span>{project.year}</div>
           )}
           <div><span className="opacity-50 block mb-1">Status</span>{project.status}</div>
         </div>
-      </section> 
+      </section>
 
       {/* Content — branches by category */}
       {project.category === 'interior' ? (
@@ -325,11 +415,11 @@ export default function ProjectDetail() {
               href="/#projects"
               className="magnetic inline-block font-mono text-xs uppercase px-5 py-2.5 rounded-full border border-[var(--ink)]"
             >
-              ← Back to all projects 
+              ← Back to all projects
             </a>
           </div>
-        </section> 
+        </section>
       )}
     </>
   );
-} 
+}

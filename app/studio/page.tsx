@@ -39,27 +39,11 @@ export default function Studio() {
         <h1 className="font-display font-semibold text-[clamp(30px,5vw,52px)] leading-tight mb-6">
           Designed by people, not templates.
         </h1>
-        <p className="opacity-80 text-[17px] leading-relaxed max-w-[56ch]">
+        <p className="opacity-80 text-[17px] leading-relaxed max-w-[56ch] ">
           Our team draws together architects, urban planners, civil and structural engineers, MEP engineers,
           environmentalists, and social-impact specialists brought together on each project according to its specific
           demands, from design inception through to implementation.
         </p>
-      </section>
-
-      <section className="px-12 py-16 border-y border-[var(--line)] bg-[var(--paper-light)] grid md:grid-cols-3 gap-10">
-        {values.map((v, i) => (
-          <motion.div
-            key={v.num}
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.4 }}
-            transition={{ duration: 0.55, delay: i * 0.08 }}
-          >
-            <span className="font-mono text-xs text-[var(--brass)] block mb-4">{v.num}</span>
-            <h3 className="font-display font-semibold text-xl mb-3">{v.title}</h3>
-            <p className="text-[15px] opacity-75 leading-relaxed">{v.text}</p>
-          </motion.div>
-        ))}
       </section>
 
       <section className="px-12 py-20">
@@ -69,7 +53,7 @@ export default function Studio() {
             <motion.div
               key={member.name}
               initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              whileInView={{ opacity: 1, y: 0 }} 
               viewport={{ once: true, amount: 0.4 }}
               transition={{ duration: 0.5, delay: i * 0.06 }}
             >
