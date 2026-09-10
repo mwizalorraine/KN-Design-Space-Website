@@ -107,12 +107,12 @@ export default function Home() {
   <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-black/10" />
   
   <div className="relative h-full flex flex-col justify-end px-6 md:px-12 pb-10 md:pb-16 text-[var(--on-dark)]">
-    <div className="font-serif italic text-xl md:text-[40px] opacity-85 mb-4">Transforming lives through architecture.</div>
+    <div className="font-serif italic text-xl text-[20px] md:text-[40px] opacity-85 mb-4">Transforming lives through architecture.</div>
     <motion.h1
       initial={{ opacity: 0, y: 24}}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 3 }} 
-      className="font-display font-bold uppercase text-[clamp(32px,8vw,96px)] leading-[0.94] tracking-tight md:max-w-[16ch] text-balance">
+      className="font-display font-bold uppercase text-[clamp(32px,8vw,96px)] leading-[0.94] tracking-tight max-w-[25ch] md:max-w-[20ch] text-balance">
       Spaces built around YOU{' '}
       <span className="relative inline-block h-[1em] overflow-hidden align-bottom">
         {rotatorWords.map((w, i) => (

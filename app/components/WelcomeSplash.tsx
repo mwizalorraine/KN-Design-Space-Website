@@ -51,13 +51,7 @@ const revealedCount = Math.floor((progress / 100) * WELCOME_TEXT.length);
           transition={{ duration: 0 }}
           className="fixed inset-0 z-[200] overflow-hidden bg-[var(--ink)] "
         >
-          {isMobile ? (
-            <img
-              src="/videos/welcome-poster.jpg"
-              alt=""
-              className="absolute inset-0 w-full h-full object-cover"
-            />
-          ) : (
+          : (
             <video
               autoPlay
               muted
@@ -68,7 +62,7 @@ const revealedCount = Math.floor((progress / 100) * WELCOME_TEXT.length);
             >
               <source src="/videos/welcome-video.mp4" type="video/mp4" />
             </video>
-          )}
+          )
 
           <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-black/70" />
 
