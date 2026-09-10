@@ -51,7 +51,7 @@ const revealedCount = Math.floor((progress / 100) * WELCOME_TEXT.length);
           transition={{ duration: 0 }}
           className="fixed inset-0 z-[200] overflow-hidden bg-[var(--ink)] "
         >
-          : (
+          (
             <video
   autoPlay
   muted

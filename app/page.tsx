@@ -107,7 +107,7 @@ export default function Home() {
   <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-black/10" />
   
   <div className="relative h-full flex flex-col justify-end px-6 md:px-12 pb-10 md:pb-16 text-[var(--on-dark)]">
-    <div className="font-serif italic text-xl text-[20px] md:text-[40px] opacity-85 mb-4">Transforming lives through architecture.</div>
+    <div className="font-serif italic text-1xl  md:text-[40px] opacity-85 mb-4">Transforming lives through architecture.</div>
     <motion.h1
       initial={{ opacity: 0, y: 24}}
       animate={{ opacity: 1, y: 0 }}
@@ -132,7 +132,7 @@ export default function Home() {
       initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, delay: 0.4 }}
-      className="max-w-[46ch] text-base md:text-[25px] leading-relaxed opacity-90 text-balance mt-1"
+      className="max-w-[46ch] text-base md:text-[25px] leading-relaxed opacity-90 text-balance"
     >
       KN Design Space is a Kigali-based architecture and design practice, designing across a wide range of sectors to create spaces that serve the people & communities who use them.
     </motion.p>

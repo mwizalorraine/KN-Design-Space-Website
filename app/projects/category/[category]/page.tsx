@@ -45,7 +45,7 @@ export default function CategoryPage() {
       <NavOverlay />
 
       <section className="px-12 pt-16 pb-10">
-        <a href="/#projects" className="magnetic font-mono text-xs uppercase opacity-60 hover:opacity-100 transition-opacity">
+        <a href="/#projects" className="magnetic font-mono text-xs uppercase opacity-60  transition-opacity">
           ← All categories
         </a>
         <h1 className="font-display font-semibold text-[clamp(32px,5vw,54px)] leading-tight mt-4">
