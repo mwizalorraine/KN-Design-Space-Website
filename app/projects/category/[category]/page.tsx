@@ -31,7 +31,7 @@ export default function CategoryPage() {
   const [projects, setProjects] = useState<Project[]>([]);
 
   useEffect(() => {
-    fetch('http://127.0.0.1:8000/api/projects/')
+    fetch('https://kn-design-space-website.onrender.com/api/projects/')
       .then((res) => res.json())
       .then((data: Project[]) => setProjects(data.filter((p) => p.category === category)))
       .catch(() => setProjects([]));

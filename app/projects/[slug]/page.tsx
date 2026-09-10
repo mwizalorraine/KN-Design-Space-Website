@@ -321,7 +321,7 @@ export default function ProjectDetail() {
   const [notFound, setNotFound] = useState(false);
 
   useEffect(() => {
-    fetch(`http://127.0.0.1:8000/api/projects/${slug}/`)
+    fetch(`https://kn-design-space-website.onrender.com/api/projects/${slug}/`)
       .then((res) => {
         if (!res.ok) throw new Error('not found');
         return res.json();

@@ -75,14 +75,14 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    fetch('http://127.0.0.1:8000/api/projects/')
+    fetch('https://kn-design-space-website.onrender.com/api/projects/')
       .then((res) => res.json())
       .then(setProjects)
       .catch(() => setProjects([]));
   }, []);
 
   useEffect(() => {
-  fetch('http://127.0.0.1:8000/api/category-images/')
+  fetch('https://kn-design-space-website.onrender.com/api/category-images/')
     .then((res) => res.json())
     .then((data: { category: string; image: string }[]) => {
       const map: Record<string, string> = {};

@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/6.1/ref/settings/
 
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
+    'https://kn-design-space-website.vercel.app',
 ]
 from pathlib import Path
 
@@ -26,7 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-7o=psc8%^-+zpo$)==*hfy%p=6t5%ksr#i5dsl3bhxx*$fw$15'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     "kn-design-space-website.onrender.com",

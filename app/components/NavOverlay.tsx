@@ -79,7 +79,7 @@ useEffect(() => {
 
   useEffect(() => {
     if (searchOpen && allProjects.length === 0) {
-      fetch('http://127.0.0.1:8000/api/projects/')
+      fetch('https://kn-design-space-website.onrender.com/api/projects/')
         .then((res) => res.json())
         .then(setAllProjects)
         .catch(() => setAllProjects([]));
