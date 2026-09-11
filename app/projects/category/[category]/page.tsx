@@ -57,10 +57,14 @@ export default function CategoryPage() {
       </section>
 
       <section className="px-12 pb-20">
-        <div className="grid md:grid-cols-3 gap-[2px] bg-[var(--line)]">
+        <div
+          className={`grid gap-[2px] bg-[var(--line)] ${
+            projects.length <= 2 ? 'md:grid-cols-2' : 'md:grid-cols-3'
+          }`}
+        >
           {projects.length === 0 && (
             <div className="bg-[var(--paper)] p-8 font-mono text-sm opacity-60 md:col-span-3">
-              Something went wrong. Try again!
+              No projects in this category yet.
             </div>
           )}
           {projects.map((p) => (
@@ -68,7 +72,7 @@ export default function CategoryPage() {
               href={`/projects/${p.slug}`}
               key={p.id}
               className="magnetic cursor-none bg-[var(--paper)] p-6 min-h-[280px] flex flex-col justify-end relative overflow-hidden group"
-            > 
+            >
               {p.cover_image ? (
                 <img
                   src={p.cover_image}

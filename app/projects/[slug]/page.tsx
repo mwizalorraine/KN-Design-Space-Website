@@ -143,7 +143,7 @@ function SpecList({ specs }: { specs: Spec[] }) {
   );
 }
 
-function BeforeAfterPair({
+function BeforeAfterRow({
   before,
   after,
   viewLabel,
@@ -153,7 +153,7 @@ function BeforeAfterPair({
   viewLabel: string;
 }) {
   return (
-    <div className="flex flex-col gap-3">
+    <>
       <div className="relative aspect-[4/3] overflow-hidden">
         <img src={before.image} alt={`${viewLabel} — before`} className="w-full h-full object-cover" />
         <span className="absolute left-3 top-3 font-mono text-[10px] uppercase px-2.5 py-1 bg-[var(--ink)] text-[var(--paper)]">
@@ -166,8 +166,10 @@ function BeforeAfterPair({
           After
         </span>
       </div>
-      <div className="font-mono text-[10px] uppercase opacity-50 text-center">{viewLabel}</div>
-    </div>
+      <div className="col-span-2 font-mono text-[10px] uppercase opacity-50 text-center -mt-1 mb-2">
+        {viewLabel}
+      </div>
+    </>
   );
 }
 
@@ -282,12 +284,9 @@ function InteriorDetail({ project }: { project: Project }) {
             <h4 className="font-display font-semibold text-2xl md:text-3xl">Before &amp; After</h4>
             <span className="font-mono text-[11px] uppercase opacity-60">Same shell, reimagined interior</span>
           </div>
-          <div
-            className="grid gap-4 mb-16"
-            style={{ gridTemplateColumns: `repeat(${pairs.length}, minmax(0, 1fr))` }}
-          >
+          <div className="grid grid-cols-2 md:grid-cols-2 gap-4 mb-16">
             {pairs.map((pair, i) => (
-              <BeforeAfterPair
+              <BeforeAfterRow
                 key={pair.before.pair_key}
                 {...pair}
                 viewLabel={pair.before.caption || `View ${String(i + 1).padStart(2, '0')}`}
@@ -341,7 +340,7 @@ export default function ProjectDetail() {
       </>
     );
   }
-
+  
   if (!project) {
     return (
       <>
@@ -360,7 +359,7 @@ export default function ProjectDetail() {
       <NavOverlay />
 
       {/* FULL-SCREEN HERO — same for every category */}
-      <section className="relative w-full h-[60vh] md:h-[90vh] min-h-[420px] md:min-h-[560px] overflow-hidden">
+      <section className="relative w-full h-[70vh] md:h-screen overflow-hidden">
         {project.cover_image ? (
           <img src={project.cover_image} alt={project.title} className="absolute inset-0 w-full h-full object-cover" />
         ) : (

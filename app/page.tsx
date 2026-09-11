@@ -107,35 +107,36 @@ export default function Home() {
   <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-black/10" />
   
   <div className="relative h-full flex flex-col justify-end px-6 md:px-12 pb-10 md:pb-16 text-[var(--on-dark)]">
-    <div className="font-serif italic text-1xl  md:text-[40px] opacity-85 mb-4">Transforming lives through architecture.</div>
-    <motion.h1
-      initial={{ opacity: 0, y: 24}}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 3 }} 
-      className="font-display font-bold uppercase text-[clamp(32px,8vw,96px)] leading-[0.94] tracking-tight max-w-[25ch] md:max-w-[20ch] text-balance">
-      Spaces built around YOU{' '}
-      <span className="relative inline-block h-[1em] overflow-hidden align-bottom">
-        {rotatorWords.map((w, i) => (
-          <motion.span
-            key={w}
-            className="absolute left-0 top-0 text-[var(--brass)]"
-            animate={{ opacity: i === word ? 1 : 0, y: i === word ? 0 : 30 }}
-            transition={{ duration: 0.5 }}
-          >
-            {w}
-          </motion.span>
-        ))}
-      </span>
-    </motion.h1>
+    <div className="font-serif italic text-xl  md:text-[40px] opacity-85 mb-4">Transforming lives through architecture.</div>
+    
+<motion.h1
+  initial={{ opacity: 0, y: 24}}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 3 }} 
+  className="font-display font-bold uppercase text-[clamp(32px,8vw,96px)] leading-[0.94] tracking-tight max-w-none md:max-w-[20ch] text-balance">
+  Spaces built around YOU{' '}
+  <span className="relative inline-block h-[1em] overflow-hidden align-bottom">
+    {rotatorWords.map((w, i) => (
+      <motion.span
+        key={w}
+        className="absolute left-0 top-0 text-[var(--brass)]"
+        animate={{ opacity: i === word ? 1 : 0, y: i === word ? 0 : 30 }}
+        transition={{ duration: 0.5 }}
+      >
+        {w}
+      </motion.span>
+    ))}
+  </span>
+</motion.h1>
 
     <motion.p
-      initial={{ opacity: 0, y: 16 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8, delay: 0.4 }}
-      className="max-w-[46ch] text-base md:text-[25px] leading-relaxed opacity-90 text-balance"
-    >
-      KN Design Space is a Kigali-based architecture and design practice, designing across a wide range of sectors to create spaces that serve the people & communities who use them.
-    </motion.p>
+  initial={{ opacity: 0, y: 16 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.8, delay: 0.4 }}
+  className="max-w-[320px] md:max-w-[480px] text-base md:text-[25px] leading-relaxed opacity-90 text-balance"
+>
+  KN Design Space is a Kigali-based architecture and design practice, designing across a wide range of sectors to create spaces that serve the people & communities who use them.
+</motion.p>
 
     <motion.div
       initial={{ opacity: 0, y: 16 }}
@@ -176,7 +177,7 @@ export default function Home() {
  <section id="projects" className="px-6 md:px-12 py-12 md:py-10 mt-0">
         <h2 className="font-display font-semibold text-3xl mb-3 mt-0">Projects Categories</h2>
         <p className="opacity-70 mb-9 max-w-[52ch]"></p> 
-        <div className="grid md:grid-cols-2 gap-2 justify-center mt-4  bg-[var(--line)]">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mt-4 bg-[var(--line)]">
           {Object.entries(categoryLabels).map(([key, label]) => {
             const catProjects = projects.filter((p) => p.category === key);
             const cover = categoryImages[key] || catProjects.find((p) => p.cover_image)?.cover_image;
