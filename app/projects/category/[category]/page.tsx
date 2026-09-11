@@ -58,7 +58,7 @@ export default function CategoryPage() {
 
       <section className="px-12 pb-20">
         <div
-          className={`grid gap-[2px] bg-[var(--line)] ${
+          className={`grid gap-[2px] ${
             projects.length <= 2 ? 'md:grid-cols-2' : 'md:grid-cols-3'
           }`}
         >
@@ -71,7 +71,7 @@ export default function CategoryPage() {
             <Link
               href={`/projects/${p.slug}`}
               key={p.id}
-              className="magnetic cursor-none bg-[var(--paper)] p-6 min-h-[280px] flex flex-col justify-end relative overflow-hidden group"
+              className="magnetic cursor-none bg-[var(--paper)] border border-[var(--line)] p-6 min-h-[280px] flex flex-col justify-end relative overflow-hidden group"
             >
               {p.cover_image ? (
                 <img

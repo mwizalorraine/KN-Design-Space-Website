@@ -176,17 +176,17 @@ export default function Home() {
 
  <section id="projects" className="px-6 md:px-12 py-12 md:py-10 mt-0">
         <h2 className="font-display font-semibold text-3xl mb-3 mt-0">Projects Categories</h2>
-        <p className="opacity-70 mb-9 max-w-[52ch]"></p> 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mt-4 bg-[var(--line)]">
+        <p className="opacity-70 mb-9 max-w-[52ch]"></p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mt-4">
           {Object.entries(categoryLabels).map(([key, label]) => {
             const catProjects = projects.filter((p) => p.category === key);
             const cover = categoryImages[key] || catProjects.find((p) => p.cover_image)?.cover_image;
-            
-            return (  
+
+            return (
               <Link
                 href={`/projects/category/${key}`}
                 key={key}
-                className="magnetic cursor-none bg-[var(--paper)] p-6 min-h-[260px] md:min-h-[400px] flex flex-col justify-end relative overflow-hidden group">
+                className="magnetic cursor-none bg-[var(--paper)] border border-[var(--line)] p-6 min-h-[260px] md:min-h-[400px] flex flex-col justify-end relative overflow-hidden group">
                 {cover ? (
                   <img
                     src={cover}
@@ -197,7 +197,7 @@ export default function Home() {
                   <div className="absolute top-6 left-6 w-8 h-8 rounded-sm bg-[var(--brass)] transition-transform duration-300 group-hover:scale-[4] group-hover:opacity-10" />
                 )}
                 {cover && <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />}
-                   <h3 className={`font-display font-semibold text-xl md:text-3xl relative ${cover ? 'text-white' : ''}`}>{label}</h3>
+                <h3 className={`font-display font-semibold text-xl md:text-3xl relative ${cover ? 'text-white' : ''}`}>{label}</h3>
               </Link>
             );
           })}
