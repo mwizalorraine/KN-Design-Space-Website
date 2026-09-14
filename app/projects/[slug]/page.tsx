@@ -282,7 +282,7 @@ function InteriorDetail({ project }: { project: Project }) {
         <>
           <div className="flex items-end justify-between mb-6">
             <h4 className="font-display font-semibold text-2xl md:text-3xl">Before &amp; After</h4>
-            <span className="font-mono text-[10px] uppercase opacity-60">Same shell, reimagined interior</span>
+            <span className="font-mono text-[9px] uppercase opacity-60">Same shell, reimagined interior</span>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-2 gap-4 mb-16">
             {pairs.map((pair, i) => (
