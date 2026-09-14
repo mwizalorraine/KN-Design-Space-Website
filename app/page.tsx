@@ -21,7 +21,7 @@ const categoryLabels: Record<string, string> = {
 // Shared content ceiling — everything above this width just gets centered
 // with more breathing room on the sides, instead of stretching further.
 // Change this ONE value to adjust the ceiling everywhere at once.
-const CONTAINER = 'max-w-[1440px] mx-auto';
+const CONTAINER = 'max-w-[1440px]';
 
 type Project = {
   id: number;
@@ -104,10 +104,10 @@ export default function Home() {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-black/10" />
 
-          <div className="relative h-full flex flex-col justify-end px-6 md:px-12 pb-10 md:pb-16 text-[var(--on-dark)]">
+        <div className={`relative h-full flex flex-col justify-end px-6 md:px-12 pb-10 md:pb-16 text-[var(--on-dark)] ${CONTAINER}`}>
           <div className="font-serif italic text-xl md:text-[40px] opacity-85 mb-4">Transforming lives through architecture.</div>
 
-          <motion.h1
+         <motion.h1
   initial={{ opacity: 0, y: 24 }}
   animate={{ opacity: 1, y: 0 }}
   transition={{ duration: 3 }}
@@ -213,7 +213,7 @@ export default function Home() {
         <div className="absolute inset-0 bg-black/10 pointer-events-none" />
         <div className={CONTAINER}>
           <h2 className="font-display font-semibold text-3xl md:text-5xl mb-10 md:mb-15 text-center">Our Services</h2>
-          <div className="grid md:grid-cols-3 gap-14 md:gap-10">
+          <div className="grid md:grid-cols-3 gap-24 md:gap-40">
             {[
               {
                 title: 'Project Design',
