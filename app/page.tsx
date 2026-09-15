@@ -313,29 +313,70 @@ export default function Home() {
             </a>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-7 md:gap-3 mb-8">
-            <div className="flex items-center gap-3">
-              <svg viewBox="0 0 24 24" className="w-7.5 h-7.5 stroke-[var(--brass)] fill-none" strokeWidth="1.8"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 3" /></svg>
-              <div>
-                <div className="font-mono text-xs md:text-[17px] uppercase opacity-50">Response Time</div>
-                <div className="font-mono text-xs md:text-[17px] uppercase">Within 2 Business Days</div>
-              </div>
-            </div>
-            <div className="flex items-center gap-3">
-              <svg viewBox="0 0 24 24" className="w-7.5 h-7.5 stroke-[var(--brass)] fill-none" strokeWidth="1.8"><rect x="3" y="4" width="18" height="17" rx="2" /><path d="M3 9h18M8 2v4M16 2v4" /></svg>
-              <div>
-                <div className="font-mono text-xs md:text-[17px] uppercase opacity-50">Office Hours</div>
-                <div className="font-mono text-xs md:text-[17px] uppercase">Mon–Fri, 9:00–17:00 CAT</div>
-              </div>
-            </div>
-            <div className="flex items-center gap-3">
-              <svg viewBox="0 0 24 24" className="w-7.5 h-7.5 stroke-[var(--brass)] fill-none" strokeWidth="1.8"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" /></svg>
-              <div>
-                <div className="font-mono text-xs md:text-[17px] uppercase opacity-50">Preferred</div>
-                <div className="font-mono text-xs md:text-[17px] uppercase">Email or WhatsApp</div>
-              </div>
-            </div>
-          </div>
+          
+<div className="w-full grid grid-cols-1 md:grid-cols-3 items-center mb-8">
+  {/* LEFT */}
+  <div className="flex items-center gap-3 justify-self-center md:justify-self-start">
+    <svg
+      viewBox="0 0 24 24"
+      className="w-7.5 h-7.5 stroke-[var(--brass)] fill-none"
+      strokeWidth="1.8"
+    >
+      <circle cx="12" cy="12" r="9" />
+      <path d="M12 7v5l3 3" />
+    </svg>
+
+    <div>
+      <div className="font-mono text-xs md:text-[17px] uppercase opacity-50">
+        Response Time
+      </div>
+      <div className="font-mono text-xs md:text-[17px] uppercase">
+        Within 2 Business Days
+      </div>
+    </div>
+  </div>
+
+  {/* CENTER */}
+  <div className="flex items-center gap-3 justify-self-center">
+    <svg
+      viewBox="0 0 24 24"
+      className="w-7.5 h-7.5 stroke-[var(--brass)] fill-none"
+      strokeWidth="1.8"
+    >
+      <rect x="3" y="4" width="18" height="17" rx="2" />
+      <path d="M3 9h18M8 2v4M16 2v4" />
+    </svg>
+
+    <div>
+      <div className="font-mono text-xs md:text-[17px] uppercase opacity-50">
+        Office Hours
+      </div>
+      <div className="font-mono text-xs md:text-[17px] uppercase">
+        Mon–Fri, 9:00–17:00 CAT
+      </div>
+    </div>
+  </div>
+
+  {/* RIGHT */}
+  <div className="flex items-center gap-3 justify-self-center md:justify-self-end">
+    <svg
+      viewBox="0 0 24 24"
+      className="w-7.5 h-7.5 stroke-[var(--brass)] fill-none"
+      strokeWidth="1.8"
+    >
+      <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
+    </svg>
+
+    <div>
+      <div className="font-mono text-xs md:text-[17px] uppercase opacity-50">
+        Preferred
+      </div>
+      <div className="font-mono text-xs md:text-[17px] uppercase">
+        Email or WhatsApp
+      </div>
+    </div>
+  </div>
+</div>
 
           <div className="grid md:grid-cols-2 gap-10 md:gap-20 mb-8">
             <div className="border border-[var(--ink)] p-3 h-fit w-full">
@@ -357,7 +398,7 @@ export default function Home() {
                 target="_blank"
                 className="magnetic inline-flex items-center gap-2 font-mono text-xs uppercase px-6 py-2.5 rounded-full bg-[var(--brass)] text-[var(--paper-light)] mt-4"
               >
-                Get directions →
+                Get directions → 
               </a>
             </div>
 
@@ -377,7 +418,7 @@ export default function Home() {
                 </div>
               </div>
               <div className="font-mono text-[15px] uppercase text-[var(--brass)] mt-6 mb-3">REACH US ON</div>
-              <div className="flex flex-wrap gap-5">
+              <div className="flex flex-wrap gap-7">
                 <a href="https://wa.me/250788841556" target="_blank" aria-label="WhatsApp" className="magnetic group flex flex-col items-center gap-1.5">
                   <span className="w-16 h-16 md:w-30 md:h-30 rounded-full border border-[var(--line)] flex items-center justify-center group-hover:bg-[var(--ink)] group-hover:text-[var(--paper-light)] transition-colors">
                     <svg viewBox="0 0 24 24" className="w-12.5 h-12.5 fill-current"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.36 5.07L2 22l5.07-1.33A9.94 9.94 0 0012 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm5.2 14.2c-.22.62-1.28 1.18-1.77 1.25-.45.07-1.02.1-1.65-.1-.38-.12-.87-.28-1.5-.55-2.64-1.14-4.36-3.8-4.5-3.98-.13-.18-1.08-1.43-1.08-2.73 0-1.3.68-1.93.92-2.2.24-.26.53-.33.7-.33h.5c.16 0 .38-.06.6.45.22.53.75 1.83.82 1.96.07.13.11.29.02.47-.09.18-.14.29-.27.44-.13.16-.28.35-.4.47-.13.13-.27.27-.12.53.16.26.7 1.15 1.5 1.86 1.03.92 1.9 1.2 2.16 1.34.26.13.42.11.57-.07.16-.18.66-.77.84-1.04.18-.26.35-.22.6-.13.24.09 1.53.72 1.79.85.26.13.44.2.5.31.07.11.07.65-.15 1.27z" /></svg>

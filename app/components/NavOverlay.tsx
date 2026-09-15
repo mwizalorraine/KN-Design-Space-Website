@@ -6,10 +6,10 @@ import ThemeToggle from './ThemeToggle';
 
 const links = [
   { label: 'Home', href: '/' },
-  { label: 'Projects', href: '/#projects' },
+  { label: 'Projects', href: '/projects' },
   { label: 'Team', href: '/studio' },
-  { label: 'Services', href: '/#services' },
-  { label: 'Contact Us', href: '/contact' },
+  { label: 'Services', href: '/services' },
+  { label: 'Newsletter', href: '/newsletter' },
 ];
 
 type SearchResult = {
@@ -72,8 +72,8 @@ useEffect(() => {
     if (label === 'Home') return pathname === '/' && activeSection === 'home';
     if (label === 'Projects') return pathname.startsWith('/projects') || (pathname === '/' && activeSection === 'projects');
     if (label === 'Team') return pathname === '/studio';
-    if (label === 'Services') return pathname === '/' && activeSection === 'services';
-    if (label === 'Contact Us') return pathname === '/contact';
+    if (label === 'Services') return pathname.startsWith('/services');
+    if (label === 'Newsletter') return pathname === '/newsletter';
     return false;
   };
 
