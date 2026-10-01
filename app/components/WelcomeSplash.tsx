@@ -6,6 +6,8 @@ import { AnimatePresence, motion } from 'framer-motion';
 export default function WelcomeSplash() {
   const [show, setShow] = useState(true);
   const [progress, setProgress] = useState(0);
+  const [videoFailed, setVideoFailed] = useState(false); // true once autoplay is confirmed blocked
+  const [posterFailed, setPosterFailed] = useState(false); // true if even the fallback image can't load
 
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -52,9 +54,13 @@ export default function WelcomeSplash() {
   /*
    * Try to start the video as soon as it is ready.
    * Muted + playsInline allows autoplay on most mobile browsers.
+   * If the browser blocks it anyway (common on mobile: data-saver mode,
+   * iOS's Wi-Fi-only autoplay setting, low power mode — outside our
+   * control), we swap to a static fallback photo instead of leaving a
+   * black screen. The splash itself (logo, tagline, progress) still runs.
    */
   useEffect(() => {
-    if (!show) return;
+    if (!show || videoFailed) return;
 
     const video = videoRef.current;
 
@@ -65,7 +71,7 @@ export default function WelcomeSplash() {
 
     const tryPlay = () => {
       video.play().catch(() => {
-        // Some mobile browsers may still block autoplay.
+        setVideoFailed(true);
       });
     };
 
@@ -73,12 +79,13 @@ export default function WelcomeSplash() {
 
     video.addEventListener('canplay', tryPlay);
     video.addEventListener('loadeddata', tryPlay);
+    video.addEventListener('error', () => setVideoFailed(true));
 
     return () => {
       video.removeEventListener('canplay', tryPlay);
       video.removeEventListener('loadeddata', tryPlay);
     };
-  }, [show]);
+  }, [show, videoFailed]);
 
   const revealedCount = Math.floor(
     (progress / 100) * WELCOME_TEXT.length
@@ -93,25 +100,42 @@ export default function WelcomeSplash() {
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0 }}
-          className="fixed inset-0 z-[200] overflow-hidden bg-black"
+          className="fixed inset-0 z-[200] overflow-hidden bg-[var(--charcoal)]"
         >
-          {/* BACKGROUND VIDEO */}
-          <video
-            ref={videoRef}
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="auto"
-            poster="/videos/welcome-poster.jpg"
-            className="absolute inset-0 w-full h-full object-cover"
-            aria-hidden="true"
-          >
-            <source
-              src="/videos/welcome-video.mp4"
-              type="video/mp4"
+          {/* BACKGROUND: video normally, or a static photo if autoplay is blocked */}
+          {!videoFailed ? (
+            <video
+              ref={videoRef}
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="auto"
+              poster="/videos/welcome-poster.jpg"
+              className="absolute inset-0 w-full h-full object-contain"
+              aria-hidden="true"
+            >
+              <source
+                src="/videos/welcome-video.mp4"
+                type="video/mp4"
+              />
+            </video>
+          ) : !posterFailed ? (
+            <img
+              src="/videos/welcome-poster.jpg"
+              alt=""
+              className="absolute inset-0 w-full h-full object-cover"
+              onError={() => setPosterFailed(true)}
             />
-          </video>
+          ) : (
+            // Last-resort fallback if even the poster image is missing —
+            // reuses an existing site photo so it's never a bare black void.
+            <img
+              src="/images/night view.png"
+              alt=""
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+          )}
 
           {/* DARK OVERLAY */}
           <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-black/70" />
@@ -137,7 +161,7 @@ export default function WelcomeSplash() {
             </motion.div>
 
             {/* WELCOME TEXT */}
-            <p className="font-serif italic text-xl md:text-5xl opacity-100 mb-7 min-h-[1.5em]">
+            <p className="font-serif italic text-xl md:text-5xl opacity-100 mb-7 min-h-[1.5em] text-[var(--on-dark)]">
               {visibleText}
               <span className="animate-pulse" />
             </p>
@@ -161,7 +185,7 @@ export default function WelcomeSplash() {
                 />
               </div>
 
-              <div className="font-mono text-[20.5px] uppercase tracking-widest opacity-80 mt-3">
+              <div className="font-mono text-[20.5px] uppercase tracking-widest opacity-80 mt-3 text-[var(--on-dark)]">
                 Loading — {progress}%
               </div>
             </motion.div>

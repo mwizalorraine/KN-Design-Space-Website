@@ -34,7 +34,7 @@ export default function ProjectsPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('https://kn-design-space-website.onrender.com/api/projects/')
+    fetch('http://127.0.0.1:8000/api/projects/')
       .then((res) => {
         if (!res.ok) {
           throw new Error('Failed to fetch projects');
@@ -66,11 +66,11 @@ export default function ProjectsPage() {
               Transforming lives through architecture.
             </p>
 
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-light tracking-tight">
+            <h1 className="font-monospace text-5xl md:text-7xl lg:text-8xl font-light tracking-tight">
               Projects
             </h1>
 
-            <p className="max-w-2xl mt-8 text-base md:text-lg leading-relaxed opacity-70">
+            <p className="max-w-2xl mt-8 text-base md:text-lg leading-relaxed opacity-70 text-balance">
               Explore our architecture and design projects across education,
               healthcare, housing, hospitality, residential and conceptual design.
             </p>
@@ -150,8 +150,16 @@ export default function ProjectsPage() {
             )}
 
           </div>
-        </section>
-
+  <div className="fixed bottom-7 z-40 flex flex-col items-end gap-3 right-[max(1.75rem,calc((100vw-1440px)/2))]"
+>
+  <a
+    href="/contact"
+    className="magnetic font-mono text-sm uppercase px-6 py-3.5 rounded-full bg-[var(--on-dark)] text-[var(--brass)] shadow-xl whitespace-nowrap "
+  >
+    Start a project →
+  </a>
+  </div>
+  </section>
       </main>
     </>
   );

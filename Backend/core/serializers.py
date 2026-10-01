@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Project, ContactMessage, ProjectImage, CategoryImage, NewsletterSubscriber, ProjectSpec
+from .models import Project, ContactMessage, ProjectImage, CategoryImage, NewsletterSubscriber, ProjectSpec, NewsItem, EventItem
 
 
 class NewsletterSerializer(serializers.ModelSerializer):
@@ -43,3 +43,13 @@ class CategoryImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = CategoryImage
         fields = ['category', 'image']
+
+class NewsItemSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = NewsItem
+        fields = ['id', 'date', 'title', 'excerpt', 'image']
+
+class EventItemSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = EventItem
+        fields = ['id', 'date', 'tag', 'title', 'description', 'media']

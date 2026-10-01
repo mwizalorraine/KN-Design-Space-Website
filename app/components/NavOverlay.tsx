@@ -79,7 +79,7 @@ useEffect(() => {
 
   useEffect(() => {
     if (searchOpen && allProjects.length === 0) {
-      fetch('https://kn-design-space-website.onrender.com/api/projects/')
+      fetch('http://127.0.0.1:8000/api/projects/')
         .then((res) => res.json())
         .then(setAllProjects)
         .catch(() => setAllProjects([]));
@@ -214,35 +214,96 @@ useEffect(() => {
         )}
       </AnimatePresence>
 
-      <AnimatePresence>
+<AnimatePresence>
         {open && (
           <motion.div
             initial={{ y: '-100%' }}
             animate={{ y: 0 }}
             exit={{ y: '-100%' }}
             transition={{ duration: 0.55, ease: [0.77, 0, 0.18, 1] }}
-            className="fixed inset-0 z-[100] bg-[var(--charcoal)] text-[var(--on-dark)] flex flex-col justify-center px-16 md:hidden"
+            className="fixed inset-0 z-[100] md:hidden overflow-hidden"
           >
-            <button onClick={() => setOpen(false)} className="magnetic absolute top-7 right-12 text-2xl">✕</button>
-            <ul>
-              {links.map((link, i) => (
-                <li key={link.label} className="overflow-hidden">
-                  <motion.a
-                    href={link.href}
-                    className="magnetic block font-display font-semibold text-[clamp(34px,6vw,64px)] py-1.5 hover:text-[var(--brass)]"
-                    initial={{ y: '100%', opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    transition={{ delay: 0.08 + i * 0.06, duration: 0.5 }}
-                    onClick={() => setOpen(false)}
+            {/* Full-bleed photo background, same treatment as your hero */}
+            <img
+              src="/images/night view.png"
+              alt=""
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-[var(--charcoal)]/95 via-[var(--charcoal)]/92 to-[var(--charcoal)]/95" />
+
+            <div className="relative h-full flex flex-col text-[var(--on-dark)] px-8 pt-6 pb-8">
+              {/* HEADER ROW — mirrors the desktop nav bar's own layout */}
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2.5">
+                  <img
+                    src="/images/KN_Design_Space_Logo.png"
+                    alt="KN Design Space"
+                    className="h-9 w-auto invert"
+                  />
+                  <span className="font-display font-bold text-xs tracking-wide">KN DESIGN SPACE</span>
+                </div>
+
+                <div className="flex items-center gap-2">
+                  <ThemeToggle />
+                  <button
+                    onClick={() => {
+                      setOpen(false);
+                      setSearchOpen(true);
+                    }}
+                    aria-label="Search"
+                    className="magnetic flex items-center justify-center w-9 h-9 rounded-full hover:bg-white/10 transition-colors"
                   >
-                    {link.label}
-                  </motion.a>
-                </li>
-              ))}
-            </ul>
-            <div className="absolute bottom-9 left-16 right-12 flex justify-between font-mono text-xs opacity-70">
-              <span>kndesignspace@gmail.com</span>
-              <span>Kigali, Rwanda</span>
+                    <svg viewBox="0 0 24 24" className="w-4.5 h-4.5 fill-none stroke-current" strokeWidth="1.8">
+                      <circle cx="11" cy="11" r="7" />
+                      <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                    </svg>
+                  </button>
+                  <button onClick={() => setOpen(false)} className="magnetic text-xl w-9 h-9 flex items-center justify-center">
+                    ✕
+                  </button>
+                </div>
+              </div>
+
+              {/* NAV LINKS — contained, list-like, not oversized headline text */}
+              <ul className="flex-1 flex flex-col justify-center gap-1 border-t border-white/10 mt-3">
+                {links.map((link, i) => {
+                  const active = isActive(link.label);
+                  return (
+                    <li key={link.label} className="border-b border-white/10 overflow-hidden">
+                      <motion.a
+                        href={link.href}
+                        className="magnetic group flex items-center justify-between py-4 font-display font-semibold text-3xl"
+                        initial={{ opacity: 0, x: -12 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.1 + i * 0.05, duration: 0.4 }}
+                        onClick={() => setOpen(false)}
+                      >
+                        <span className={active ? 'text-[var(--brass)]' : 'group-hover:text-[var(--brass)] transition-colors'}>
+                          {link.label}
+                        </span>
+                        <span className="font-mono text-xs opacity-40 group-hover:opacity-100 group-hover:text-[var(--brass)] transition-all">
+                          →
+                        </span>
+                      </motion.a>
+                    </li>
+                  );
+                })}
+              </ul>
+
+              {/* LET'S TALK — a real pill button, same as desktop, not just another list word */}
+              <motion.a
+                href="/contact"
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 + links.length * 0.05 + 0.1, duration: 0.4 }}
+                onClick={() => setOpen(false)}
+                className="magnetic mt-8 inline-flex justify-center items-center font-mono text-xs uppercase tracking-wide rounded-full px-6 py-3 border border-[var(--on-dark)] hover:bg-[var(--on-dark)] hover:text-[var(--charcoal)] transition-colors"
+              >
+                Let&apos;s talk →
+              </motion.a>
+
+              {/* CONTACT INFO */}
+              
             </div>
           </motion.div>
         )}
@@ -250,3 +311,8 @@ useEffect(() => {
     </>
   );
 }
+
+
+
+
+

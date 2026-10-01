@@ -142,3 +142,32 @@ class ProjectImage(models.Model):
 
     def __str__(self):
         return f"{self.project.title} — image {self.order}"
+
+
+class NewsItem(models.Model):
+    date = models.CharField(max_length=100)
+    title = models.CharField(max_length=200)
+    excerpt = models.TextField()
+    image = models.ImageField(upload_to='news/', blank=True, null=True)
+    order = models.PositiveIntegerField(default=0)
+
+    class Meta:
+        ordering = ['order', '-id']
+
+    def __str__(self):
+        return self.title
+
+
+class EventItem(models.Model):
+    date = models.CharField(max_length=100)
+    tag = models.CharField(max_length=50)
+    title = models.CharField(max_length=200)
+    description = models.CharField(max_length=300)
+    media = models.ImageField(upload_to='events/', blank=True, null=True)
+    order = models.PositiveIntegerField(default=0)
+
+    class Meta:
+        ordering = ['order', '-id']
+
+    def __str__(self):
+        return self.title

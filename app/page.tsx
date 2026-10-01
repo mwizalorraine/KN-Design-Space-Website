@@ -72,14 +72,14 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    fetch('https://kn-design-space-website.onrender.com/api/projects/')
+    fetch('http://127.0.0.1:8000/api/projects/')
       .then((res) => res.json())
       .then(setProjects)
       .catch(() => setProjects([]));
   }, []);
 
   useEffect(() => {
-    fetch('https://kn-design-space-website.onrender.com/api/category-images/')
+    fetch('http://127.0.0.1:8000/api/category-images/')
       .then((res) => res.json())
       .then((data: { category: string; image: string }[]) => {
         const map: Record<string, string> = {};
@@ -104,7 +104,7 @@ export default function Home() {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-black/10" />
 
-        <div className={`relative h-full flex flex-col justify-end px-6 md:px-12 pb-10 md:pb-16 text-[var(--on-dark)] ${CONTAINER}`}>
+        <div className={`relative h-full flex flex-col justify-end px-6 md:px-12 pb-7 md:pb-12 text-[var(--on-dark)] ${CONTAINER}`}>
           <div className="font-serif italic text-xl md:text-[40px] opacity-85 mb-4">Transforming lives through architecture.</div>
 
          <motion.h1
@@ -141,11 +141,10 @@ export default function Home() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
-            className="flex flex-wrap gap-3 mt-8"
+            className="flex flex-wrap gap-3 mt-6"
           >
-            <a href="#projects" className="magnetic font-mono text-xs uppercase px-5 py-2.5 rounded-full bg-[var(--on-dark)] text-[var(--charcoal)]">View Projects →</a>
-            <a href="/contact" className="magnetic font-mono text-xs uppercase px-5 py-2.5 rounded-full border border-[var(--on-dark)]">Start a project</a>
-          </motion.div>
+            <a href="/projects" className="magnetic font-mono text-lg uppercase px-10 py-2.5 max-w-[760px] rounded-full bg-[var(--on-dark)] text-[var(--charcoal)]">View Projects →</a>
+           </motion.div>
         </div>
       </section>
 
@@ -178,8 +177,8 @@ export default function Home() {
       {/* PROJECT CATEGORIES */}
       <section id="projects" className="px-6 md:px-12 py-12 md:py-10 mt-0">
         <div className={CONTAINER}>
-          <h2 className="font-display font-semibold text-3xl mb-3 mt-0">Projects Categories</h2>
-          <p className="opacity-70 mb-9 max-w-[52ch]"></p>
+          <h2 className="font-display font-semibold text-5xl mb-3 mt-0">Projects Categories</h2>
+          <p className="opacity-70 mb-9 text-xl max-w-[62ch]">Click a Category to see the projects in it.</p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mt-4">
             {Object.entries(categoryLabels).map(([key, label]) => {
               const catProjects = projects.filter((p) => p.category === key);
@@ -209,59 +208,192 @@ export default function Home() {
       </section>
 
       {/* SERVICES — background stays full-bleed, inner content capped */}
-      <section id="services" className="relative px-6 md:px-12 py-12 md:py-20 bg-[var(--paper-light)]">
-        <div className="absolute inset-0 bg-black/10 pointer-events-none" />
-        <div className={CONTAINER}>
-          <h2 className="font-display font-semibold text-3xl md:text-5xl mb-10 md:mb-15 text-center">Our Services</h2>
-          <div className="grid md:grid-cols-3 gap-24 md:gap-40">
-            {[
-              {
-                title: 'Project Design',
-                icon: <img src="/images/files/Project_Design.png" alt="" className="w-10 h-10 md:w-14 md:h-14 service-icon" />,
-                items: [
-                  { label: 'Architectural Design', icon: <img src="/images/files/Arch_design_icon.png" alt="" className="w-10 h-10 service-icon" /> },
-                  { label: 'Interior Design', icon: <img src="/images/files/Interior_Design.png" alt="" className="w-10 h-10 service-icon" /> },
-                  { label: 'Cost and Feasibility Planning', icon: <img src="/images/files/Cost_and_feasibility.png" alt="" className="w-10 h-10 service-icon" /> },
-                ],
-              },
-              {
-                title: 'Project Engineering',
-                icon: <img src="/images/files/Proj_Engineering.png" alt="" className="w-10 h-10 md:w-14 md:h-14 service-icon" />,
-                items: [
-                  { label: 'Structural Design', icon: <img src="/images/files/Structural_Design.png" alt="" className="w-10 h-10 service-icon" /> },
-                  { label: 'Electrical Design', icon: <img src="/images/files/Electrical_Design.png" alt="" className="w-10 h-10 service-icon" /> },
-                  { label: 'Mechanical and Plumbing Design', icon: <img src="/images/files/Mechanical_Plumbing.png" alt="" className="w-10 h-10 service-icon" /> },
-                ],
-              },
-              {
-                title: 'Project Compliance',
-                icon: <img src="/images/files/Proj_Compliance.png" alt="" className="w-10 h-10 md:w-14 md:h-14 service-icon" />,
-                items: [
-                  { label: 'Land Use Advisory', icon: <img src="/images/files/Land_Use_Advisory.png" alt="" className="w-10 h-10 service-icon" /> },
-                  { label: 'Permitting and Approvals', icon: <img src="/images/files/Permitting_Approval.png" alt="" className="w-10 h-10 service-icon" /> },
-                  { label: 'Construction Supervision', icon: <img src="/images/files/construction-supervision.png" alt="" className="w-10 h-10 service-icon" /> },
-                ],
-              },
-            ].map((cat) => (
-              <div key={cat.title} className="text-center md:text-left">
-                <div className="w-16 h-16 md:w-24 md:h-24 rounded-full border-2 border-[var(--brass)] flex-shrink-0 flex items-center justify-center mx-auto md:mx-0 mb-3 text-[var(--brass)]">
-                  {cat.icon}
-                </div>
-                <h3 className="font-display font-bold text-3xl uppercase leading-tight mb-3">{cat.title}</h3>
-                <div className="w-36 md:w-44 h-[2px] bg-[var(--brass)] mx-auto md:mx-0 mb-6 md:mb-9" />
-                <ul className="space-y-6">
-                  {cat.items.map((item) => (
-                    <li key={item.label} className="flex items-center gap-4 justify-center md:justify-start">
-                      <span className="w-8 h-8 flex-shrink-0 text-[var(--ink)] opacity-100">{item.icon}</span>
-                      <span className="text-base md:text-xl">{item.label}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+      <section
+          id="services"
+          className="relative min-h-[calc(100dvh-84px)] px-6 md:px-12 py-12 md:py-20 bg-[var(--paper-light)]"
+        >
+          <div className="absolute inset-0 bg-black/10 pointer-events-none" />
+
+          <div className={CONTAINER}>
+            <h2 className="font-display font-semibold text-3xl md:text-5xl mb-10 md:mb-15 text-center">
+              Our Services
+            </h2>
+
+            {/* SERVICES GRID */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-16 md:gap-40 lg:gap-28 xl:gap-42">
+              {[
+                {
+                  title: 'Project Design',
+                  icon: (
+                    <img
+                      src="/images/files/Project_Design.png"
+                      alt=""
+                      className="w-10 h-10 md:w-14 md:h-14 service-icon"
+                    />
+                  ),
+                  items: [
+                    {
+                      label: 'Architectural Design',
+                      icon: (
+                        <img
+                          src="/images/files/Arch_design_icon.png"
+                          alt=""
+                          className="w-10 h-10 service-icon"
+                        />
+                      ),
+                    },
+                    {
+                      label: 'Interior Design',
+                      icon: (
+                        <img
+                          src="/images/files/Interior_Design.png"
+                          alt=""
+                          className="w-10 h-10 service-icon"
+                        />
+                      ),
+                    },
+                    {
+                      label: 'Cost and Feasibility Planning',
+                      icon: (
+                        <img
+                          src="/images/files/Cost_and_feasibility.png"
+                          alt=""
+                          className="w-10 h-10 service-icon"
+                        />
+                      ),
+                    },
+                  ],
+                },
+
+                {
+                  title: 'Project Engineering',
+                  icon: (
+                    <img
+                      src="/images/files/Proj_Engineering.png"
+                      alt=""
+                      className="w-10 h-10 md:w-14 md:h-14 service-icon"
+                    />
+                  ),
+                  items: [
+                    {
+                      label: 'Structural Design',
+                      icon: (
+                        <img
+                          src="/images/files/Structural_Design.png"
+                          alt=""
+                          className="w-10 h-10 service-icon"
+                        />
+                      ),
+                    },
+                    {
+                      label: 'Electrical Design',
+                      icon: (
+                        <img
+                          src="/images/files/Electrical_Design.png"
+                          alt=""
+                          className="w-10 h-10 service-icon"
+                        />
+                      ),
+                    },
+                    {
+                      label: 'Mechanical and Plumbing Design',
+                      icon: (
+                        <img
+                          src="/images/files/Mechanical_Plumbing.png"
+                          alt=""
+                          className="w-10 h-10 service-icon"
+                        />
+                      ),
+                    },
+                  ],
+                },
+
+                {
+                  title: 'Project Compliance',
+                  icon: (
+                    <img
+                      src="/images/files/Proj_Compliance.png"
+                      alt=""
+                      className="w-10 h-10 md:w-14 md:h-14 service-icon"
+                    />
+                  ),
+                  items: [
+                    {
+                      label: 'Land Use Advisory',
+                      icon: (
+                        <img
+                          src="/images/files/Land_Use_Advisory.png"
+                          alt=""
+                          className="w-10 h-10 service-icon"
+                        />
+                      ),
+                    },
+                    {
+                      label: 'Permitting and Approvals',
+                      icon: (
+                        <img
+                          src="/images/files/Permitting_Approval.png"
+                          alt=""
+                          className="w-10 h-10 service-icon"
+                        />
+                      ),
+                    },
+                    {
+                      label: 'Construction Supervision',
+                      icon: (
+                        <img
+                          src="/images/files/construction-supervision.png"
+                          alt=""
+                          className="w-10 h-10 service-icon"
+                        />
+                      ),
+                    },
+                  ],
+                },
+              ].map((cat) => (
+                <div
+  key={cat.title}
+  className="w-full flex flex-col items-center md:items-start"
+>
+  {/* MAIN SERVICE ICON */}
+  <div className="w-16 h-16 md:w-24 md:h-24 rounded-full border-2 border-[var(--brass)] flex-shrink-0 flex items-center justify-center mb-4 text-[var(--brass)]">
+    {cat.icon}
+  </div>
+
+  {/* MAIN SERVICE TITLE */}
+  <h3 className="w-full font-display font-bold text-2xl md:text-3xl uppercase leading-tight text-center md:text-left mb-3">
+    {cat.title}
+  </h3>
+
+  {/* DIVIDER */}
+  <div className="w-36 md:w-44 h-[2px] bg-[var(--brass)] mb-7 md:mb-9" />
+
+  {/* LEAVE SUBSERVICES EXACTLY AS THEY ARE */}
+  <ul className="w-full max-w-[310px] space-y-6">
+    {cat.items.map((item) => (
+      <li
+        key={item.label}
+        className="grid grid-cols-[44px_1fr] gap-8 md:gap-4 items-center"
+      >
+        <span className="w-11 h-10 flex items-center justify-center shrink-0">
+          {item.icon}
+        </span>
+
+        <span className="text-lg md:text-xl leading-snug text-left md:whitespace-nowrap">
+          {item.label}
+        </span>
+        
+      </li>
+    ))}
+  </ul>
+</div>
+
+
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+
 
       {/* PROCESS */}
       <section className="px-6 md:px-12 py-16 md:py-20" id="process">
@@ -308,9 +440,6 @@ export default function Home() {
             <h2 className="font-display font-semibold text-[clamp(28px,3.5vw,44px)] max-w-[50ch] leading-tight">
               Have a site in mind? Let&apos;s design it.
             </h2>
-            <a href="/contact" className="magnetic font-mono text-xs uppercase px-5 py-2.5 rounded-full bg-[var(--ink)] text-[var(--paper-light)]">
-              Start a project →
-            </a>
           </div>
 
           
@@ -394,7 +523,7 @@ export default function Home() {
               </div>
               <p className="pt-3 font-mono text-[10.5px] uppercase opacity-55">
                 KN 5 Rd, Immeuble Aigle Blanc, 1st Floor, Kimihurura, Kigali
-              </p>
+              </p> 
               <a
                 href="https://www.google.com/maps/dir/?api=1&destination=KN%205%20Rd%2C%20Immeuble%20Aigle%20Blanc%2C%20Kimihurura%2C%20Kigali%2C%20Rwanda"
                 target="_blank"
@@ -404,43 +533,65 @@ export default function Home() {
               </a>
             </div>
 
-            <div className="flex flex-col justify-center">
-              <div className="flex flex-wrap gap-x-12 gap-y-6 mb-6">
+            <div className="flex flex-col justify-end">
+              <div className="flex flex-wrap justify-between gap-y-6 mb-12">
                 <div>
-                  <div className="font-mono text-[13px] uppercase text-[var(--brass)] mb-2">Email</div>
+                  <div className="font-mono text-[17px] uppercase text-[var(--brass)] mb-2">Email</div>
                   <a href="https://mail.google.com/mail/?view=cm&fs=1&to=kndesignspace@gmail.com" target="_blank" className="magnetic font-display font-semibold text-lg md:text-2xl hover:text-[var(--brass)] transition-colors">
                     kndesignspace@gmail.com
                   </a>
                 </div>
                 <div>
-                  <div className="font-mono text-[13px] uppercase text-[var(--brass)] mb-2">Phone</div>
+                  <div className="font-mono text-[17px] uppercase text-[var(--brass)] mb-2">Phone</div>
                   <a href="tel:+250788841556" className="magnetic font-display font-semibold text-lg md:text-2xl hover:text-[var(--brass)] transition-colors">
                     +250 788 841 556
                   </a>
                 </div>
               </div>
-              <div className="font-mono text-[15px] uppercase text-[var(--brass)] mt-6 mb-3">REACH US ON</div>
-              <div className="flex flex-wrap gap-7">
+              <div className="font-mono text-[17px] uppercase text-[var(--brass)] mt-5 mb-6">REACH US ON</div>
+              <div className="flex flex-wrap justify-between gap-y-5">
                 <a href="https://wa.me/250788841556" target="_blank" aria-label="WhatsApp" className="magnetic group flex flex-col items-center gap-1.5">
-                  <span className="w-20 h-20 md:w-30 md:h-30 rounded-full border border-[var(--line)] flex items-center justify-center group-hover:bg-[var(--ink)] group-hover:text-[var(--paper-light)] transition-colors">
+                  <span className="w-22 h-22 md:w-27 md:h-27 rounded-full border border-[var(--line)] flex items-center justify-center group-hover:bg-[var(--ink)] group-hover:text-[var(--paper-light)] transition-colors">
                     <svg viewBox="0 0 24 24" className="w-12.5 h-12.5 fill-current"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.36 5.07L2 22l5.07-1.33A9.94 9.94 0 0012 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm5.2 14.2c-.22.62-1.28 1.18-1.77 1.25-.45.07-1.02.1-1.65-.1-.38-.12-.87-.28-1.5-.55-2.64-1.14-4.36-3.8-4.5-3.98-.13-.18-1.08-1.43-1.08-2.73 0-1.3.68-1.93.92-2.2.24-.26.53-.33.7-.33h.5c.16 0 .38-.06.6.45.22.53.75 1.83.82 1.96.07.13.11.29.02.47-.09.18-.14.29-.27.44-.13.16-.28.35-.4.47-.13.13-.27.27-.12.53.16.26.7 1.15 1.5 1.86 1.03.92 1.9 1.2 2.16 1.34.26.13.42.11.57-.07.16-.18.66-.77.84-1.04.18-.26.35-.22.6-.13.24.09 1.53.72 1.79.85.26.13.44.2.5.31.07.11.07.65-.15 1.27z" /></svg>
                   </span>
                   <span className="font-mono text-[10px] uppercase opacity-60 group-hover:opacity-100 group-hover:text-[var(--brass)] transition-all">WhatsApp</span>
                 </a>
                 <a href="https://www.instagram.com/kn_design_space/" target="_blank" aria-label="Instagram" className="magnetic group flex flex-col items-center gap-1.5">
-                  <span className="w-20 h-20 md:w-30 md:h-30 rounded-full border border-[var(--line)] flex items-center justify-center group-hover:bg-[var(--ink)] group-hover:text-[var(--paper-light)] transition-colors">
+                  <span className="w-22 h-22 md:w-27 md:h-27 rounded-full border border-[var(--line)] flex items-center justify-center group-hover:bg-[var(--ink)] group-hover:text-[var(--paper-light)] transition-colors">
                     <svg viewBox="0 0 24 24" className="w-12.5 h-12.5 fill-current"><path d="M12 2c2.7 0 3.05.01 4.12.06 1.06.05 1.79.22 2.43.47.66.26 1.21.6 1.76 1.15.55.55.89 1.1 1.15 1.76.25.64.42 1.37.47 2.43.05 1.07.06 1.42.06 4.12s-.01 3.05-.06 4.12c-.05 1.06-.22 1.79-.47 2.43a4.9 4.9 0 01-1.15 1.76 4.9 4.9 0 01-1.76 1.15c-.64.25-1.37.42-2.43.47-1.07.05-1.42.06-4.12.06s-3.05-.01-4.12-.06c-1.06-.05-1.79-.22-2.43-.47a4.9 4.9 0 01-1.76-1.15 4.9 4.9 0 01-1.15-1.76c-.25-.64-.42-1.37-.47-2.43C2.01 15.05 2 14.7 2 12s.01-3.05.06-4.12c.05-1.06.22-1.79.47-2.43.26-.66.6-1.21 1.15-1.76A4.9 4.9 0 015.44 2.53c.64-.25 1.37-.42 2.43-.47C8.95 2.01 9.3 2 12 2zm0 5a5 5 0 100 10 5 5 0 000-10zm0 8.2a3.2 3.2 0 110-6.4 3.2 3.2 0 010 6.4zm5.2-8.4a1.17 1.17 0 100-2.34 1.17 1.17 0 000 2.34z" /></svg>
                   </span>
                   <span className="font-mono text-[10px] uppercase opacity-60 group-hover:opacity-100 group-hover:text-[var(--brass)] transition-all">Instagram</span>
                 </a>
+              <a
+              href="https://www.youtube.com/@KNDesignSpace"
+              target="_blank"
+              rel="noopener noreferrer"
+               aria-label="YouTube"
+               className="magnetic group flex flex-col items-center gap-1.5"
+               >
+              <span className="w-22 h-22 md:w-27 md:h-27 rounded-full border border-[var(--line)] flex items-center justify-center group-hover:bg-[var(--ink)] group-hover:text-[var(--paper-light)] transition-colors">
+                <svg
+                 viewBox="0 0 24 24"
+                className="w-12.5 h-12.5 fill-current"
+                 >
+                  <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31.5 31.5 0 0 0 0 12a31.5 31.5 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31.5 31.5 0 0 0 24 12a31.5 31.5 0 0 0-.5-5.8zM9.6 15.8V8.2l6.4 3.8-6.4 3.8z" />
+                </svg>
+                  </span>
+
+              <span className="font-mono text-[10px] uppercase opacity-60 group-hover:opacity-100 group-hover:text-[var(--brass)] transition-all">
+                  YouTube
+                  </span>
+                </a>
+
+
                 <a href="#" aria-label="LinkedIn" className="magnetic group flex flex-col items-center gap-1.5 hover:opacity-100 transition-opacity">
-                  <span className="w-20 h-20 md:w-30 md:h-30 rounded-full border border-[var(--line)] flex items-center justify-center group-hover:bg-[var(--ink)] group-hover:text-[var(--paper-light)] transition-colors">
+                  <span className="w-22 h-22 md:w-27 md:h-27 rounded-full border border-[var(--line)] flex items-center justify-center group-hover:bg-[var(--ink)] group-hover:text-[var(--paper-light)] transition-colors">
                     <svg viewBox="0 0 24 24" className="w-12.5 h-12.5 fill-current"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.03-1.85-3.03-1.85 0-2.14 1.45-2.14 2.94v5.66H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 110-4.13 2.07 2.07 0 010 4.13zM7.12 20.45H3.56V9h3.56v11.45z" /></svg>
                   </span>
                   <span className="font-mono text-[10px] uppercase opacity-60 group-hover:text-[var(--brass)] transition-all">LinkedIn</span>
                 </a>
                 <a href="#" aria-label="X (Twitter)" className="magnetic group flex flex-col items-center gap-1.5">
-                  <span className="w-20 h-20 md:w-30 md:h-30 rounded-full border border-[var(--line)] flex items-center justify-center group-hover:bg-[var(--ink)] group-hover:text-[var(--paper-light)] transition-colors">
+                  <span className="w-22 h-22 md:w-27 md:h-27 rounded-full border border-[var(--line)] flex items-center justify-center group-hover:bg-[var(--ink)] group-hover:text-[var(--paper-light)] transition-colors">
                     <svg viewBox="0 0 24 24" className="w-12.5 h-12.5 md:w-8 md:h-8 fill-current">
                       <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
                     </svg>
@@ -448,29 +599,30 @@ export default function Home() {
                   <span className="font-mono text-[10px] uppercase opacity-60 group-hover:opacity-100 group-hover:text-[var(--brass)] transition-all">X</span>
                 </a>
               </div>
-            </div>
+            </div> 
           </div>
 
           <div className="border-t border-[var(--line)] mt-10 pt-6 flex flex-col md:flex-row justify-between items-center gap-2">
             <p className="font-mono text-[11px] uppercase opacity-50">
               © {new Date().getFullYear()} KN Design Space. All rights reserved.
             </p>
-            <p className="font-mono text-[11px] uppercase opacity-50">
-              Kimihurura, Gasabo, Kigali, Rwanda
-            </p>
           </div>
         </div>
-      </footer>
+        <div className="fixed right-[max(1.75rem)] top-2/3 md:top-1/2 -translate-y-1/2 z-40 flex flex-col gap-4">
 
-      <a
-        href="https://wa.me/250788841556"
-        target="_blank"
-        className="magnetic fixed bottom-7 right-7 w-14 h-14 rounded-full bg-[#25D366] flex items-center justify-center shadow-lg z-40"
-      >
-        <svg viewBox="0 0 24 24" className="w-7 h-7 fill-white">
-          <path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.36 5.07L2 22l5.07-1.33A9.94 9.94 0 0012 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm5.2 14.2c-.22.62-1.28 1.18-1.77 1.25-.45.07-1.02.1-1.65-.1-.38-.12-.87-.28-1.5-.55-2.64-1.14-4.36-3.8-4.5-3.98-.13-.18-1.08-1.43-1.08-2.73 0-1.3.68-1.93.92-2.2.24-.26.53-.33.7-.33h.5c.16 0 .38-.06.6.45.22.53.75 1.83.82 1.96.07.13.11.29.02.47-.09.18-.14.29-.27.44-.13.16-.28.35-.4.47-.13.13-.27.27-.12.53.16.26.7 1.15 1.5 1.86 1.03.92 1.9 1.2 2.16 1.34.26.13.42.11.57-.07.16-.18.66-.77.84-1.04.18-.26.35-.22.6-.13.24.09 1.53.72 1.79.85.26.13.44.2.5.31.07.11.07.65-.15 1.27z" />
-        </svg>
-      </a>
+  <a
+    href="https://wa.me/250788841556"
+    target="_blank"
+    className="magnetic w-10 h-10 md:w-16 md:h-16 rounded-full bg-[#25D366] flex items-center justify-center shadow-lg"
+  >
+    <svg viewBox="0 0 24 24" className="w-6 h-6 md:w-9 md:h-9 fill-white">
+      <path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.36 5.07L2 22l5.07-1.33A9.94 9.94 0 0012 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm5.2 14.2c-.22.62-1.28 1.18-1.77 1.25-.45.07-1.02.1-1.65-.1-.38-.12-.87-.28-1.5-.55-2.64-1.14-4.36-3.8-4.5-3.98-.13-.18-1.08-1.43-1.08-2.73 0-1.3.68-1.93.92-2.2.24-.26.53-.33.7-.33h.5c.16 0 .38-.06.6.45.22.53.75 1.83.82 1.96.07.13.11.29.02.47-.09.18-.14.29-.27.44-.13.16-.28.35-.4.47-.13.13-.27.27-.12.53.16.26.7 1.15 1.5 1.86 1.03.92 1.9 1.2 2.16 1.34.26.13.42.11.57-.07.16-.18.66-.77.84-1.04.18-.26.35-.22.6-.13.24.09 1.53.72 1.79.85.26.13.44.2.5.31.07.11.07.65-.15 1.27z" />
+    </svg>
+  </a>
+
+</div>
+      </footer>  
     </>
   );
 }
+

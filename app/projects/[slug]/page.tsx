@@ -54,13 +54,13 @@ type Project = {
 | Django/Render may return either:
 |   /media/...
 | or:
-|   https://kn-design-space-website.onrender.com/media/...
+|   https://127.0.0.1:8000/media/...
 |
 | This helper supports both.
 |--------------------------------------------------------------------------
 */
 
-const BACKEND_URL = 'https://kn-design-space-website.onrender.com';
+const BACKEND_URL = 'http://127.0.0.1:8000';
 
 function getImageUrl(image: string | null | undefined) {
   if (!image) return '';
@@ -345,7 +345,7 @@ function groupBeforeAfter(images: GalleryImage[]) {
 }
 
 // -----------------------------------------------------------------------------
-// Section subtitles
+// Section subtitles  
 // -----------------------------------------------------------------------------
 
 const SECTION_SUBTITLES: Record<string, string> = {
@@ -355,7 +355,7 @@ const SECTION_SUBTITLES: Record<string, string> = {
     "Meeting space, pin-up wall & MD office",
   'As Built':
     'The completed studio, photographed on site',
-};
+}; 
 
 // -----------------------------------------------------------------------------
 // Group images by section
@@ -555,6 +555,15 @@ function InteriorDetail({
           ← Back to all projects
         </a>
       </div>
+      <div className="fixed bottom-7 z-40 flex flex-col items-end gap-3 right-[max(1.75rem,calc((100vw-1440px)/2))]"
+>
+  <a
+    href="/contact"
+    className="magnetic font-mono text-sm uppercase px-6 py-3.5 rounded-full bg-[var(--on-dark)] text-[var(--brass)] shadow-xl whitespace-nowrap "
+  >
+    Start a project → 
+  </a> 
+  </div>
     </section>
   );
 }
@@ -773,7 +782,20 @@ export default function ProjectDetail() {
               ← Back to all projects
             </a>
           </div>
+
+          <div
+  className="fixed bottom-7 z-40 flex flex-col items-end gap-3 right-[max(1.75rem,calc((100vw-1440px)/2))]"
+>
+  <a
+    href="/contact"
+    className="magnetic font-mono text-sm uppercase px-6 py-3.5 rounded-full bg-[var(--on-dark)] text-[var(--brass)] shadow-xl whitespace-nowrap "
+  >
+    Start a project → 
+  </a> 
+  </div>
         </section>
+
+        
       )}
     </>
   );

@@ -7,6 +7,16 @@ from .models import CategoryImage
 from .serializers import CategoryImageSerializer
 from .models import NewsletterSubscriber
 from .serializers import NewsletterSerializer
+from .models import NewsItem, EventItem
+from .serializers import NewsItemSerializer, EventItemSerializer
+
+class NewsListView(generics.ListAPIView):
+    queryset = NewsItem.objects.all()
+    serializer_class = NewsItemSerializer
+
+class EventListView(generics.ListAPIView):
+    queryset = EventItem.objects.all()
+    serializer_class = EventItemSerializer
 
 class NewsletterSignupView(generics.CreateAPIView):
     queryset = NewsletterSubscriber.objects.all()

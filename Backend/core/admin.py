@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Project, ContactMessage, ProjectImage, CategoryImage, NewsletterSubscriber, ProjectSpec
+from .models import Project, ContactMessage, ProjectImage, CategoryImage, NewsletterSubscriber, ProjectSpec, NewsItem, EventItem
 
 
 @admin.register(NewsletterSubscriber)
@@ -38,3 +38,14 @@ class ContactMessageAdmin(admin.ModelAdmin):
 @admin.register(CategoryImage)
 class CategoryImageAdmin(admin.ModelAdmin):
     list_display = ('category',)
+
+
+@admin.register(NewsItem)
+class NewsItemAdmin(admin.ModelAdmin):
+    list_display = ('title', 'date', 'order')
+    ordering = ('order',)
+
+@admin.register(EventItem)
+class EventItemAdmin(admin.ModelAdmin):
+    list_display = ('title', 'tag', 'date', 'order')
+    ordering = ('order',) 
