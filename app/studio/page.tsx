@@ -116,7 +116,7 @@ function TeamCard({ member, i, large = false }: { member: Member; i: number; lar
       : `border-2 border-[var(--charcoal)] ${
           open ? 'bg-[var(--charcoal)] text-[var(--paper-light)]' : ''
         }`
-  } ${large ? 'w-20 h-20 text-xl' : 'w-16 h-16 text-base'}`}
+  } ${large ? 'w-40 h-40 text-xl' : 'w-25 h-25 text-base'}`}
 >
   {member.image ? (
     <img
@@ -174,11 +174,22 @@ function TeamSection({
   return (
     <section className="px-6 md:px-12 py-16 md:py-20">
       <div className={CONTAINER}>
-        <div className="flex items-baseline justify-between mb-10 flex-wrap gap-2">
-          <h2 className="font-display font-semibold text-2xl md:text-4xl">{title}</h2>
-          <span className="font-mono text-xs uppercase text-[var(--brass)]">{subtitle}</span>
-        </div>
-        <div className={`grid gap-4 ${columns}`}>
+        <div className="flex items-end justify-between mb-10 flex-wrap gap-4">
+        <div>
+        <h2 className="font-display font-semibold text-2xl md:text-4xl">
+        {title}
+        </h2>
+
+       <span className="font-serif text-lg text-[var(--on-paper)]  opacity-85 block mt-2">
+        Tap a profile to read more about their experience
+        </span>
+         </div>
+
+        <span className="font-monospace text-sm uppercase text-[var(--brass)]">
+          {subtitle}
+        </span>
+         </div>
+        <div className={`grid gap-6 items-start ${columns}`}>
           {members.map((member, i) => (
             <TeamCard key={`${member.name}-${member.position}`} member={member} i={i} large={large} />
           ))}
@@ -194,16 +205,16 @@ export default function Studio() {
       <Cursor />
       <NavOverlay />
 
-      <section className="px-6 md:px-12 pt-32 pb-12 md:pt-40 md:pb-16 border-b border-[var(--line)]">
+      <section className="px-6 md:px-12 pt-32 pb-12 md:pt-40 md:pb-16 justify-center border-b border-[var(--line)] ">
         <div className={CONTAINER}>
           <span className="font-serif italic text-xl text-[var(--brass)] block opacity-85 mb-3">The people behind the work.</span>
           <h1 className="font-display font-semibold text-[clamp(32px,5.5vw,56px)] leading-tight max-w-[22ch] mb-6">
             Our Team
           </h1>
-          <p className="opacity-75 max-w-[62ch] leading-relaxed text-balance">
-            From board governance to site supervision, KN Design Space is built on licensed
-            professionals, registered engineers and specialists who carry every project from
-            first conversation through to handover. 
+          <p className="opacity-75 text-xl max-w-[62ch] leading-relaxed text-balance">
+            Our team draws together Architects, Structural and MEP engineers, Urban designers, Quantity surveyors, 
+            Site supervisors, Finance professionals, and Administrative specialists, supported by experienced Board 
+            members and leadership who guide project delivery, financial oversight, and strategic growth. 
           </p>
         </div>
       </section>
@@ -212,7 +223,7 @@ export default function Studio() {
           title="Board of Directors" 
           subtitle={`${BOARD.length} people`}
           members={BOARD}
-          columns="md:grid-cols-2 lg:grid-cols-3"
+          columns="md:grid-cols-2 lg:grid-cols-2"
         />
       <div className="border-t border-[var(--line)]" />
 
@@ -228,7 +239,7 @@ export default function Studio() {
         title="Core Team"
         subtitle={`${CORE_TEAM.length} people`}
         members={CORE_TEAM}
-        columns="md:grid-cols-2 lg:grid-cols-3"
+        columns="md:grid-cols-2 lg:grid-cols-2"
       />  
       <div className="bg-[var(--paper-light)]">
       </div>

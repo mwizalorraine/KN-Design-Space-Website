@@ -60,7 +60,8 @@ type Project = {
 |--------------------------------------------------------------------------
 */
 
-const BACKEND_URL = 'http://127.0.0.1:8000';
+const BACKEND_URL =
+  process.env.NEXT_PUBLIC_BACKEND_URL || 'http://127.0.0.1:8000';
 
 function getImageUrl(image: string | null | undefined) {
   if (!image) return '';
